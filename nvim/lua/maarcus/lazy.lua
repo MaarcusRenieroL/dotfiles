@@ -14,4 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	{ import = "maarcus.plugins.ui" },
 	{ import = "maarcus.plugins.git" },
+	{ import = "maarcus.plugins.coding" },
+	{ import = "maarcus.plugins.misc" },
 })
