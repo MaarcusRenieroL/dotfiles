@@ -41,3 +41,6 @@ k("n", "gi", "<cmd>Telescope lsp_implementations<CR>", { desc = "Show LSP implem
 k("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Show buffer diagnostics" })
 k("n", "<leader>rs", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
 k("n", "K", vim.lsp.buf.hover, { desc = "Show documentation for what is under the cursor" })
+
+k("n", "<leader>gd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { desc = "Go to definition" })
+k("n", "<leader>gc", "<cmd>lua require('goto-preview').close_all_win()<CR>", { desc = "Close all preview windows" })
