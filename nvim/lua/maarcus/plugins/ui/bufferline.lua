@@ -8,5 +8,6 @@ return {
 				offsets = { { filetype = "NvimTree", text = "Nvim Tree", padding = 1 } },
 			},
 		})
+		require("transparent").clear_prefix("Bufferline")
 	end,
 }
