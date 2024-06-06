@@ -1,40 +1,13 @@
-1password		
-firefox
-google-chrome
-iterm2
-notion-calendar
-rectangle
-vlc
-alacritty
-betterdiscord-installer
-git-credential-manager
-insomnia
-localsend
-opera
-spotify
-zed
-arc
-discord
-gitkraken
-intellij-idea
-notion
-raycast
-visual-studio-code
-lazygit
-skhd
-yabai
-neovim
-fzf
-tmux
-ripgrep
-redis
-spicetify-client
-zoxide
-node
-mysql
-thefuck
-tree-sitter
-postgresql
 utorrent
 java
 
+brew install --cask 1password firefox google-chrome iterm2 notion-calendar rectangle vlc betterdiscord-installer git-credential-manager insomnia opera spotify zed arc discord gitkraken intellij-idea notion raycast visual-studio-code
+
+brew install lazygit neovim fzf tmux ripgrep redis spicetify-cli zoxide node mysql thefuck tree-sitter
+
+brew install koekeishiya/formulae/yabai
+brew install koekeishiya/formulae/skhd
+
+curl -sS https://starship.rs/install.sh | sh
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
