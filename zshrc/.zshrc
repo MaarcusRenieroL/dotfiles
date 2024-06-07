@@ -1,4 +1,5 @@
 # Path to your oh-my-zsh installation.
+EDITOR=nvim
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
@@ -55,3 +56,5 @@ setopt hist_verify
 
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
+
+neofetch
