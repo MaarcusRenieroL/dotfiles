@@ -5,8 +5,6 @@ local k = vim.keymap.set
 k("n", "<leader>w", ":w<CR>", { desc = "Write and Quit file" })
 k("n", "wq", ":wqa<CR>", { desc = "Write and Quit file" })
 
-k("n", "<leader>nh", ":nohls<CR>", { desc = "Clear Highlighting" })
-
 k("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
 k("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
 k("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
@@ -24,14 +22,15 @@ k("n", "<leader>x", "<cmd>bd<CR>", { desc = "Close buffer" })
 k("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
 k("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Live grep" })
 
-k("n", "<leader>tt", "<cmd>TroubleToggle<CR>", { desc = "Open/close trouble list" })
-k("n", "<leader>tw", "<cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "Open trouble workspace diagnostics" })
-k("n", "<leader>td", "<cmd>TroubleToggle document_diagnostics<CR>", { desc = "Open trouble document diagnostics" })
-k("n", "<leader>tq", "<cmd>TroubleToggle quickfix<CR>", { desc = "Open trouble quickfix list" })
-k("n", "<leader>tl", "<cmd>TroubleToggle loclist<CR>", { desc = "Open trouble location list" })
+k("n", "<leader>tt", "<cmd>Trouble<CR>", { desc = "Open/close trouble list" })
+k("n", "<leader>tw", "<cmd>Trouble workspace_diagnostics<CR>", { desc = "Open trouble workspace diagnostics" })
+k("n", "<leader>td", "<cmd>Trouble document_diagnostics<CR>", { desc = "Open trouble document diagnostics" })
+k("n", "<leader>tq", "<cmd>Trouble quickfix<CR>", { desc = "Open trouble quickfix list" })
+k("n", "<leader>tl", "<cmd>Trouble loclist<CR>", { desc = "Open trouble location list" })
 
-k("n", "nh", "<cmd>Gitsigns next_hunk", { desc = "Next Hunk" })
-k("n", "ph", "<cmd>Gitsigns prev_hunk", { desc = "Previous Hunk" })
+k("n", "nh", "<cmd>Gitsigns next_hunk<CR>", { desc = "Next Hunk" })
+k("n", "ph", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Previous Hunk" })
+k("n", "vh", "<cmd>Gitsigns preview_hunk", { desc = "Preview Hunk" })
 
 k("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "Open lazy git" })
 

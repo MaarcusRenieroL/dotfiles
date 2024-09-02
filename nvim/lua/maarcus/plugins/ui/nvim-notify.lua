@@ -4,6 +4,7 @@ return {
 		require("notify").setup({
 			background_colour = "#000000",
 			enabled = true,
+			timeout = 100,
 		})
 	end,
 }
