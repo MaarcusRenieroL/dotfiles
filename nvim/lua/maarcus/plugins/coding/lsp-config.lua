@@ -1,4 +1,7 @@
 return {
+	{
+		"mfussenegger/nvim-jdtls",
+	},
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
