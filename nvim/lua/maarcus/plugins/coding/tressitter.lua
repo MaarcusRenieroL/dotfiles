@@ -8,6 +8,7 @@ return {
 	config = function()
 		-- import nvim-treesitter plugin
 		local treesitter = require("nvim-treesitter.configs")
+		require("nvim-ts-autotag").setup()
 
 		-- configure treesitter
 		treesitter.setup({ -- enable syntax highlighting
@@ -42,7 +43,7 @@ return {
 				"query",
 				"vimdoc",
 				"c",
-        "java"
+				"java",
 			},
 			incremental_selection = {
 				enable = true,
