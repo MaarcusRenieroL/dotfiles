@@ -3,7 +3,6 @@ return {
 	dependencies = "nvim-tree/nvim-web-devicons",
 	config = function()
 		local nvimtree = require("nvim-tree")
-		require("transparent").clear_prefix("nvimtree")
 
 		vim.cmd([[hi NvimTreeNormal guibg=NONE ctermbg=NONE]])
 

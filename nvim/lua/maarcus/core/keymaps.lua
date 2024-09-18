@@ -2,17 +2,15 @@ vim.g.mapleader = " "
 
 local k = vim.keymap.set
 
-k("n", "<leader>w", ":w<CR>", { desc = "Write and Quit file" })
-k("n", "wq", ":wqa<CR>", { desc = "Write and Quit file" })
+k("n", "wq", ":wq<CR>", { desc = "Write and Quit file" })
 
 k("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
 k("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
-k("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
-k("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
+k("n", "<leader>se", "<C-w>=", { desc = "Make splits of equal size" })
+k("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split window" })
 
 k("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
 k("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" })
-k("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" })
 k("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })
 
 k("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Go to next buffer" })
@@ -23,10 +21,6 @@ k("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
 k("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Live grep" })
 
 k("n", "<leader>tt", "<cmd>Trouble<CR>", { desc = "Open/close trouble list" })
-k("n", "<leader>tw", "<cmd>Trouble workspace_diagnostics<CR>", { desc = "Open trouble workspace diagnostics" })
-k("n", "<leader>td", "<cmd>Trouble document_diagnostics<CR>", { desc = "Open trouble document diagnostics" })
-k("n", "<leader>tq", "<cmd>Trouble quickfix<CR>", { desc = "Open trouble quickfix list" })
-k("n", "<leader>tl", "<cmd>Trouble loclist<CR>", { desc = "Open trouble location list" })
 
 k("n", "nh", "<cmd>Gitsigns next_hunk<CR>", { desc = "Next Hunk" })
 k("n", "ph", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Previous Hunk" })
@@ -41,5 +35,17 @@ k("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Show buf
 k("n", "<leader>rs", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
 k("n", "K", vim.lsp.buf.hover, { desc = "Show documentation for what is under the cursor" })
 
-k("n", "<leader>gd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { desc = "Go to definition" })
-k("n", "<leader>gc", "<cmd>lua require('goto-preview').close_all_win()<CR>", { desc = "Close all preview windows" })
+k("n", "K", vim.lsp.buf.hover, {})
+k("n", "<leader>gd", vim.lsp.buf.definition, {})
+k("n", "<leader>gr", vim.lsp.buf.references, {})
+k("n", "<leader>ca", vim.lsp.buf.code_action, {})
+k("n", "<leader>rn", vim.lsp.buf.code_action, {})
+k("n", "<space>rn", vim.lsp.buf.rename, {})
+
+k({ "n", "v" }, "<leader>mp", function()
+	require("conform").format({
+		lsp_fallback = true,
+		async = false,
+		timeout_ms = 1000,
+	})
+end, { desc = "Format file or range (in visual mode)" })

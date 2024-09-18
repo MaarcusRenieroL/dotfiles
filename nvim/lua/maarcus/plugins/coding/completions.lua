@@ -9,7 +9,6 @@ return {
 			"rafamadriz/friendly-snippets",
 		},
 	},
-	{ "hrsh7th/cmp-cmdline" },
 	{
 		"hrsh7th/nvim-cmp",
 		config = function()
