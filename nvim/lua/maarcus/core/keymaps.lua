@@ -2,8 +2,6 @@ vim.g.mapleader = " "
 
 local k = vim.keymap.set
 
-k("n", "wq", ":wq<CR>", { desc = "Write and Quit file" })
-
 k("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
 k("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
 k("n", "<leader>se", "<C-w>=", { desc = "Make splits of equal size" })
