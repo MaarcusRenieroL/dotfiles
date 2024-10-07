@@ -15,7 +15,7 @@ return {
 			local cmp = require("cmp")
 			require("luasnip.loaders.from_vscode").lazy_load()
 
-			cmp.setup({
+			local options = {
 				snippet = {
 					expand = function(args)
 						require("luasnip").lsp_expand(args.body)
@@ -34,11 +34,16 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
+					{ name = "path" },
 					{ name = "luasnip" }, -- For luasnip users.
 				}, {
 					{ name = "buffer" },
 				}),
-			})
+			}
+
+			options = vim.tbl_deep_extend("force", options, require("nvchad.cmp"))
+
+			cmp.setup(options)
 		end,
 	},
 }
