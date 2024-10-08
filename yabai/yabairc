@@ -29,5 +29,3 @@ yabai -m rule --add app="^WhatsApp.*$" \
          manage=on \
          display=^1 \
          grid=1:1:0:0:1:1
-
-yabai -m config external_bar all:32:0
