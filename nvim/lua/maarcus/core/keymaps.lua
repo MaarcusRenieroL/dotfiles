@@ -11,8 +11,8 @@ k("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
 k("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" })
 k("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })
 
-k("n", "<Tab>", "<cmd>:lua require('nvchad.tabufline').prev()<CR>", { desc = "Go to next buffer" })
-k("n", "<S-Tab>", "<cmd>:lua require('nvchad.tabufline').next()<CR>", { desc = "Go to previous buffer" })
+k("n", "<Tab>", "<cmd>:lua require('nvchad.tabufline').next()<CR>", { desc = "Go to next buffer" })
+k("n", "<S-Tab>", "<cmd>:lua require('nvchad.tabufline').prev()<CR>", { desc = "Go to previous buffer" })
 k("n", "<leader>x", "<cmd>bd<CR>", { desc = "Close buffer" })
 k("n", "<leader>bax", "<cmd>:lua require('nvchad.tabufline').closeAllBufs(true)")
 
