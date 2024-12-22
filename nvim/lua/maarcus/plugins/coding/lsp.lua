@@ -28,6 +28,9 @@ return {
 		opts = {
 			auto_install = true,
 		},
+    config = function ()
+      require("mason-lspconfig").setup()
+    end
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -38,6 +41,7 @@ return {
 			local lspconfig = require("lspconfig")
 
 			lspconfig.tailwindcss.setup({
+        cmd = { "tailwindcss-language-server", "--stdio" },
 				capabilities = capabilities,
 			})
 
@@ -66,7 +70,8 @@ return {
 			})
 
 			lspconfig.angularls.setup({
-				capabilities = capabilities,
+        cmd = { "ngserver", "--stdio", "--tsProbeLocations", "--ngProbeLocations" },
+        capabilities = capabilities,
 			})
 		end,
 	},
