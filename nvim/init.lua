@@ -445,6 +445,73 @@ require("lazy").setup({
 
 		{
 
+			-- dashboard
+
+			{
+				"goolord/alpha-nvim",
+				dependencies = { "nvim-tree/nvim-web-devicons" },
+				config = function()
+					local alpha = require("alpha")
+					local dashboard = require("alpha.themes.dashboard")
+
+					dashboard.section.header.val = vim.split(
+						[[
+⠀⠀⠀⠀⠀⣖⣴⣆⡀⠀⣠⠶⢉⡾⠻⢦⣀⠀⠀⠀⢷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠬⠀⠀⢊⡠⠏⢉⣹⠞⠛⣦⡾⣶⡖⠛⠁⡄⢄⠇⡰⠻⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠈⠀⣷⡿⠋⣀⡴⣋⡤⠖⣿⣿⠁⢸⣿⡧⠀⢹⠌⡸⠁⢀⡄⠉⣱⣶⣂⣀⢀⡆⣠⠀⣠⠂⠀⠀⢀⠄⠄⢀⠄⡀⠀⠀⡀⠀⠰⠆⠀⠀
+⢀⡴⠋⣴⣾⡗⠋⢹⡄⣼⡏⠃⢈⣼⣿⣖⣦⠨⣠⠃⢀⡞⠀⠈⠋⠡⡾⠟⠋⠛⠳⣦⣧⠀⣤⢥⣅⣁⣁⣀⣖⠥⢂⡈⠀⣼⣟⠁⠀⠀
+⢨⣴⣾⠋⣿⢇⢀⠆⢘⣏⣤⣶⣿⣿⣿⣿⡎⡦⡟⠀⠚⠀⠀⠀⠀⠀⢠⠀⠀⠀⢀⠈⠋⢳⣷⢸⠁⣄⠀⢹⢷⣶⢿⢷⣾⣿⣿⣷⠀⠀
+⠀⡼⢳⣴⠇⢀⣬⣶⣿⣿⣿⣿⣿⣿⣿⢹⣿⡇⠀⣭⣉⣱⡀⠀⠀⠀⢸⡆⠀⢀⡼⠀⠀⢠⠋⢸⠀⡇⠀⣾⣿⣀⣤⣤⣿⣿⣿⣿⣧⡀
+⠴⢃⣤⣿⣿⣿⣿⣿⣿⣿⣿⢻⠏⢻⣏⣿⣿⠃⠀⡟⢷⣬⣣⡀⠀⠀⢸⡇⢰⣿⡜⠁⠀⢸⠀⣾⠁⡇⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣾⣿⣿⣿⣿⣿⣿⣿⢿⡟⠁⣸⠀⠨⢻⡘⣿⠀⠀⠈⢦⣙⣛⣧⡀⠀⠸⢧⠿⠋⠀⠀⠀⢸⣼⣷⣄⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⠿⢋⡴⢋⢤⠀⡇⠀⠀⠀⠻⣿⠀⠀⠀⠈⠻⠿⢿⣷⣴⡏⣾⡄⢀⣀⣤⣴⣟⣉⣉⡟⠉⣹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⠿⠋⣁⡴⣫⠞⢁⡿⢀⡇⠀⠀⠀⠀⣿⠀⢷⠂⠀⠀⠀⠀⠀⠹⢠⠟⢛⣻⠿⣿⣿⣿⡟⠋⠐⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣯⣵⡶⢿⢻⡟⠁⠀⣼⢃⢺⢿⠿⣽⣷⣾⣿⣦⣜⣷⣄⠀⠀⠀⢀⠇⡎⠀⠈⢧⡀⢀⣎⡴⠇⠀⣸⣿⣿⣿⣿⣿⣿⡿⣿⣿⣿⣿⣿⣿
+⠛⠉⠀⢸⡿⠀⠀⢀⣟⡎⢸⠀⠀⠀⠀⢸⡟⡷⡀⠹⡧⢝⠢⠤⣿⣼⠅⠀⠀⠀⢉⣻⣿⡷⠀⣰⣿⣿⣿⣿⣿⣿⣿⢳⣿⣿⣿⣿⣿⣿
+⠀⠀⠀⠘⠃⠀⠀⢸⡿⠀⢸⠀⠀⠀⠀⢻⡄⠹⡷⡀⠈⣖⠭⣒⡢⠭⠉⠉⣩⣽⡿⠛⠉⢀⣴⣿⣿⡿⣿⣿⣿⣿⡏⢸⣿⣿⣿⣿⣿⣿
+⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⢸⠀⠀⠀⠀⢸⡇⠀⢻⡱⡄⠈⠳⣦⣬⣽⡟⠋⠉⠀⢀⣠⣶⡿⣿⣿⣯⣷⣿⣿⣿⣿⠁⣿⣿⣿⣿⣿⣿⣿
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⢸⡇⠀⠀⠳⡈⢲⣤⣀⣈⣇⣀⠤⠴⠚⠋⢉⣠⣾⣿⣿⣿⣿⣿⣿⣳⠃⠀⣿⣿⣿⣿⣿⣿⣿
+    ]],
+						"\n",
+						true
+					)
+
+					-- 🔘 Buttons
+					dashboard.section.buttons.val = {
+						dashboard.button("e", "  New File", ":ene <BAR> startinsert<CR>"),
+						dashboard.button("f", "󰱼  Find File", ":Telescope find_files<CR>"),
+						dashboard.button("r", "  Recent Files", ":Telescope oldfiles<CR>"),
+						dashboard.button("p", "  Projects", ":Telescope projects<CR>"),
+						dashboard.button("t", "  Find Text", ":Telescope live_grep<CR>"),
+						dashboard.button("c", "  Config", ":e $MYVIMRC<CR>"),
+						dashboard.button("q", "  Quit", ":qa<CR>"),
+					}
+
+					-- 📜 Footer
+					dashboard.section.footer.val = function()
+						local stats = require("lazy").stats()
+						return {
+							"",
+							"",
+							"",
+							"⚡ Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins",
+							"",
+							" " .. os.date("%A, %B %d"),
+							"",
+							"Ready to cut through bugs with three swords?",
+						}
+					end
+
+					-- Highlighting
+					dashboard.section.header.opts.hl = "Include"
+					dashboard.section.buttons.opts.hl = "Keyword"
+					dashboard.section.footer.opts.hl = "Constant"
+
+					-- Initialize alpha
+					alpha.setup(dashboard.opts)
+				end,
+			},
+
 			-- theme
 
 			{
@@ -549,6 +616,97 @@ require("lazy").setup({
 				end,
 			},
 
+			-- bufferline
+
+			{
+				"akinsho/bufferline.nvim",
+				version = "*",
+				dependencies = { "nvim-tree/nvim-web-devicons" },
+				config = function()
+					require("bufferline").setup({
+						options = {
+							mode = "buffers", -- or "tabs"
+							numbers = "ordinal", -- or "buffer_id", "none"
+							close_command = "bdelete! %d",
+							right_mouse_command = "bdelete! %d",
+							left_mouse_command = "buffer %d",
+							middle_mouse_command = nil,
+
+							indicator = {
+								icon = "▎",
+								style = "icon",
+							},
+
+							buffer_close_icon = "",
+							modified_icon = "●",
+							close_icon = "",
+							left_trunc_marker = "",
+							right_trunc_marker = "",
+
+							max_name_length = 18,
+							max_prefix_length = 15,
+							truncate_names = true,
+
+							diagnostics = "nvim_lsp",
+							diagnostics_update_in_insert = false,
+							diagnostics_indicator = function(count, level, diagnostics_dict, context)
+								local icon = level:match("error") and " " or " "
+								return " " .. icon .. count
+							end,
+
+							offsets = {
+								{
+									filetype = "NvimTree",
+									text = "File Explorer",
+									text_align = "center",
+									separator = true,
+								},
+							},
+
+							show_buffer_icons = true,
+							show_buffer_close_icons = true,
+							show_close_icon = true,
+							show_tab_indicators = true,
+							persist_buffer_sort = true,
+
+							separator_style = "thin",
+							enforce_regular_tabs = false,
+							always_show_bufferline = true,
+							sort_by = "insert_after_current",
+						},
+					})
+
+					-- 🔑 Keymaps for bufferline
+					local keymap = vim.keymap.set
+					local opts = { noremap = true, silent = true }
+
+					-- Buffer navigation
+					keymap("n", "<Tab>", "<Cmd>BufferLineCycleNext<CR>", opts)
+					keymap("n", "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", opts)
+
+					-- Move buffer left/right
+					keymap("n", "<leader><Left>", "<Cmd>BufferLineMovePrev<CR>", opts)
+					keymap("n", "<leader><Right>", "<Cmd>BufferLineMoveNext<CR>", opts)
+
+					-- Pick buffer (like Telescope)
+					keymap("n", "<leader>bp", "<Cmd>BufferLinePick<CR>", opts)
+
+					-- Close current buffer
+					keymap("n", "<leader>bd", "<Cmd>bdelete<CR>", opts)
+
+					-- Close all but current
+					keymap("n", "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", opts)
+
+					-- Close buffers to the left/right
+					keymap("n", "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", opts)
+					keymap("n", "<leader>br", "<Cmd>BufferLineCloseRight<CR>", opts)
+
+					-- Go to buffer by ordinal (1–9)
+					for i = 1, 9 do
+						keymap("n", ("<leader>%d"):format(i), ("<Cmd>BufferLineGoToBuffer %d<CR>"):format(i), opts)
+					end
+				end,
+			},
 		},
 
 		-- git
@@ -598,7 +756,6 @@ require("lazy").setup({
 					})
 				end,
 			},
-
 		},
 
 		-- misc
@@ -663,8 +820,32 @@ require("lazy").setup({
 				},
 			},
 
-		},
+			-- discord rich presence
 
+			{
+				"andweeb/presence.nvim",
+				event = "VeryLazy",
+				config = function()
+					require("presence"):setup({
+						auto_update = true,
+						neovim_image_text = "Neovim > VSCode",
+						main_image = "neovim",
+
+						editing_text = "Editing %s",
+						file_explorer_text = "Browsing %s",
+						git_commit_text = "Committing changes",
+						plugin_manager_text = "Managing plugins",
+						reading_text = "Reading %s",
+						workspace_text = "Working on %s",
+						line_number_text = "Line %d out of %d",
+
+						debounce_timeout = 10,
+						enable_line_number = true,
+						blacklist = {},
+					})
+				end,
+			},
+		},
 	},
 
 	-- automatically check for plugin updates
