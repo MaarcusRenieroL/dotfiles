@@ -1,39 +1,32 @@
--- global variables
+-- Global Variables
 
 local opt = vim.opt
 local k = vim.keymap.set
 
 vim.g.mapleader = " "
 
--- base options for neovim
+-- Base options for Neovim
 
 opt.relativenumber = true
 opt.number = true
-
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.autoindent = true
-
 opt.wrap = false
-
 opt.ignorecase = true
 opt.smartcase = true
-
 opt.cursorline = true
-
 opt.signcolumn = "yes"
-
 opt.backspace = "indent,eol,start"
-
 opt.clipboard:append("unnamedplus")
-
 opt.splitright = true
 opt.splitbelow = true
-
 opt.swapfile = false
 
--- global shortcuts
+-- Keymaps
+
+-- Window management
 
 k("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
 k("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
@@ -41,12 +34,13 @@ k("n", "<leader>se", "<C-w>=", { desc = "Make splits of equal size" })
 k("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split window" })
 
 -- Formatting and linting shortcuts
+
 k("n", "<leader>lf", "<cmd>Format<CR>", { desc = "Format current buffer" })
 k("n", "<leader>lF", "<cmd>FormatWrite<CR>", { desc = "Format and write current buffer" })
 k("n", "<leader>ld", "<cmd>NullLsInfo<CR>", { desc = "Show null-ls info" })
 k("n", "<leader>la", "<cmd>CodeActionMenu<CR>", { desc = "Show code actions" })
 
--- Bootstrap lazy.nvim
+-- Bootstrap lazy package manager
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -68,22 +62,17 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
 
--- Setup lazy.nvim
+-- Setting up lazy with different plugins
 
 require("lazy").setup({
 	spec = {
-		-- add your plugins here
-
-		-- core infrastructure
 
 		{ "nvim-lua/plenary.nvim" },
 
 		-- navigation
 
 		{
-
-			-- nvim tree
-
+			-- nvim-tree
 			{
 				"nvim-tree/nvim-tree.lua",
 				version = "*",
@@ -93,12 +82,9 @@ require("lazy").setup({
 				},
 				config = function()
 					local nvimtree = require("nvim-tree")
-
 					vim.cmd([[hi NvimTreeNormal guibg=NONE ctermbg=NONE]])
-
 					vim.g.loaded_netrw = 1
 					vim.g.loaded_netrwPlugin = 1
-
 					nvimtree.setup({
 						view = {
 							width = 45,
@@ -155,7 +141,6 @@ require("lazy").setup({
 							ignore = false,
 						},
 					})
-
 					k("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
 					k(
 						"n",
@@ -168,7 +153,6 @@ require("lazy").setup({
 			},
 
 			-- telescope
-
 			{
 				"nvim-telescope/telescope.nvim",
 				tag = "0.1.6",
@@ -185,7 +169,6 @@ require("lazy").setup({
 							sorting_strategy = "ascending",
 						},
 					})
-
 					k("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
 					k("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Live grep" })
 				end,
@@ -196,7 +179,7 @@ require("lazy").setup({
 
 		{
 
-			-- lsp
+			-- java lsp
 
 			{
 				"nvim-java/nvim-java",
@@ -215,27 +198,32 @@ require("lazy").setup({
 				},
 			},
 
-			{
-				"williamboman/mason.nvim",
-				lazy = false,
-				config = function()
-					require("mason").setup()
-				end,
-			},
+			-- mason
 
 			{
-				"williamboman/mason-lspconfig.nvim",
-				lazy = false,
+
+				{
+					"williamboman/mason.nvim",
+					lazy = false,
+					config = function()
+						require("mason").setup()
+					end,
+				},
+
+				{
+					"williamboman/mason-lspconfig.nvim",
+					lazy = false,
+				},
 			},
+
+			-- lsp
 
 			{
 				"neovim/nvim-lspconfig",
 				lazy = false,
 				config = function()
 					local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 					local lspconfig = require("lspconfig")
-
 					-- Helper function to safely setup LSP servers
 					local function setup_lsp(server_name, config)
 						local ok, _ = pcall(function()
@@ -245,7 +233,6 @@ require("lazy").setup({
 							vim.notify("Failed to setup " .. server_name .. " LSP", vim.log.levels.WARN)
 						end
 					end
-
 					-- Setup LSP servers
 					setup_lsp("tailwindcss")
 					setup_lsp("html")
@@ -253,13 +240,15 @@ require("lazy").setup({
 					setup_lsp("lua_ls")
 					setup_lsp("ts_ls")
 					setup_lsp("angularls")
-
 					-- Special setup for Java
 					setup_lsp("jdtls", {
 						capabilities = capabilities,
 						cmd = {
 							"jdtls",
-							"--jvm-arg=" .. string.format("-javaagent:%s", vim.fn.stdpath("data") .. "/mason/packages/jdtls/lombok.jar"),
+							"--jvm-arg=" .. string.format(
+								"-javaagent:%s",
+								vim.fn.stdpath("data") .. "/mason/packages/jdtls/lombok.jar"
+							),
 						},
 					})
 				end,
@@ -268,51 +257,52 @@ require("lazy").setup({
 			-- auto complete
 
 			{
-				"hrsh7th/cmp-nvim-lsp",
-			},
 
-			{
-				"L3MON4D3/LuaSnip",
-				dependencies = {
-					"saadparwaiz1/cmp_luasnip",
-					"rafamadriz/friendly-snippets",
+				{
+					"hrsh7th/cmp-nvim-lsp",
 				},
-			},
 
-			{
-				"hrsh7th/nvim-cmp",
-				config = function()
-					local cmp = require("cmp")
-					require("luasnip.loaders.from_vscode").lazy_load()
+				{
+					"L3MON4D3/LuaSnip",
+					dependencies = {
+						"saadparwaiz1/cmp_luasnip",
+						"rafamadriz/friendly-snippets",
+					},
+				},
 
-					local options = {
-						snippet = {
-							expand = function(args)
-								require("luasnip").lsp_expand(args.body)
-							end,
-						},
-						window = {
-							completion = cmp.config.window.bordered(),
-							documentation = cmp.config.window.bordered(),
-						},
-						mapping = cmp.mapping.preset.insert({
-							["<C-b>"] = cmp.mapping.scroll_docs(-4),
-							["<C-f>"] = cmp.mapping.scroll_docs(4),
-							["<C-Space>"] = cmp.mapping.complete(),
-							["<C-e>"] = cmp.mapping.abort(),
-							["<CR>"] = cmp.mapping.confirm({ select = true }),
-						}),
-						sources = cmp.config.sources({
-							{ name = "nvim_lsp" },
-							{ name = "path" },
-							{ name = "luasnip" }, -- For luasnip users.
-						}, {
-							{ name = "buffer" },
-						}),
-					}
-
-					cmp.setup(options)
-				end,
+				{
+					"hrsh7th/nvim-cmp",
+					config = function()
+						local cmp = require("cmp")
+						require("luasnip.loaders.from_vscode").lazy_load()
+						local options = {
+							snippet = {
+								expand = function(args)
+									require("luasnip").lsp_expand(args.body)
+								end,
+							},
+							window = {
+								completion = cmp.config.window.bordered(),
+								documentation = cmp.config.window.bordered(),
+							},
+							mapping = cmp.mapping.preset.insert({
+								["<C-b>"] = cmp.mapping.scroll_docs(-4),
+								["<C-f>"] = cmp.mapping.scroll_docs(4),
+								["<C-Space>"] = cmp.mapping.complete(),
+								["<C-e>"] = cmp.mapping.abort(),
+								["<CR>"] = cmp.mapping.confirm({ select = true }),
+							}),
+							sources = cmp.config.sources({
+								{ name = "nvim_lsp" },
+								{ name = "path" },
+								{ name = "luasnip" }, -- For luasnip users.
+							}, {
+								{ name = "buffer" },
+							}),
+						}
+						cmp.setup(options)
+					end,
+				},
 			},
 
 			-- formatting and linting
@@ -322,64 +312,41 @@ require("lazy").setup({
 				event = { "BufReadPre", "BufNewFile" },
 				config = function()
 					local conform = require("conform")
-
 					conform.setup({
 						formatters_by_ft = {
-							-- Web technologies
-							javascript = { "prettier", "eslint_d" },
-							typescript = { "prettier", "eslint_d" },
-							javascriptreact = { "prettier", "eslint_d" },
-							typescriptreact = { "prettier", "eslint_d" },
-							jsx = { "prettier", "eslint_d" },
-							tsx = { "prettier", "eslint_d" },
+							javascript = { "prettier" },
+							typescript = { "prettier" },
+							javascriptreact = { "prettier" },
+							typescriptreact = { "prettier" },
+							jsx = { "prettier" },
+							tsx = { "prettier" },
 							css = { "prettier", "stylelint" },
-							scss = { "prettier", "stylelint" },
-							sass = { "prettier", "stylelint" },
-							less = { "prettier", "stylelint" },
-							html = { "prettier", "htmlbeautifier" },
-							htmldjango = { "prettier", "htmlbeautifier" },
-
-							-- JSON and config files
-							json = { "prettier", "jsonlint" },
-							jsonc = { "prettier" },
-							yaml = { "prettier", "yamllint" },
-							yml = { "prettier", "yamllint" },
+							html = { "prettier" },
+							json = { "prettier" },
+							yaml = { "prettier" },
+							yml = { "prettier" },
 							toml = { "taplo" },
 
-							-- Markup and documentation
 							markdown = { "prettier", "markdownlint" },
 							md = { "prettier", "markdownlint" },
-							rst = { "rstfmt" },
 
 							-- Database and ORM
+
 							sql = { "sqlformat" },
 							prisma = { "prisma-fmt" },
 
 							-- Programming languages
+
 							lua = { "stylua" },
-							python = { "isort", "black", "ruff" },
 							java = { "google-java-format", "checkstyle" },
-							rust = { "rustfmt" },
-							go = { "gofmt", "goimports" },
-							c = { "clang_format" },
-							cpp = { "clang_format" },
-							csharp = { "csharpier" },
-							php = { "php_cs_fixer" },
-							ruby = { "rubocop" },
-							scala = { "scalafmt" },
-							kotlin = { "ktlint" },
 
 							-- Shell and config
+
 							sh = { "shfmt", "shellcheck" },
 							bash = { "shfmt", "shellcheck" },
 							zsh = { "shfmt", "shellcheck" },
 							fish = { "fish_indent" },
 							dockerfile = { "hadolint" },
-							make = { "make" },
-
-							-- GraphQL
-							graphql = { "prettier" },
-							gql = { "prettier" },
 						},
 						format_on_save = {
 							timeout_ms = 3000,
@@ -387,7 +354,6 @@ require("lazy").setup({
 						},
 						notify_on_error = true,
 						formatters = {
-							-- Custom formatter configurations
 							prettier = {
 								prepend_args = {
 									"--print-width=100",
@@ -439,7 +405,6 @@ require("lazy").setup({
 						"RainbowViolet",
 						"RainbowCyan",
 					}
-
 					local hooks = require("ibl.hooks")
 					-- create the highlight groups in the highlight setup hook, so they are reset
 					-- every time the colorscheme changes
@@ -452,7 +417,6 @@ require("lazy").setup({
 						vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
 						vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
 					end)
-
 					require("ibl").setup({ indent = { highlight = highlight } })
 				end,
 			},
@@ -468,12 +432,10 @@ require("lazy").setup({
 			config = function(_, opts)
 				require("nvim-treesitter").setup({
 					automatic_installation = true,
-
 					highlight = {
 						enable = true,
 						use_languagetree = true,
 					},
-
 					indent = { enable = true },
 				})
 			end,
@@ -482,19 +444,23 @@ require("lazy").setup({
 		-- ui
 
 		{
+
+			-- theme
+
 			{
 				"projekt0n/github-nvim-theme",
 				name = "github-theme",
-				lazy = false, -- make sure we load this during startup if it is your main colorscheme
-				priority = 1000, -- make sure to load this before all the other start plugins
+				lazy = false,
+				priority = 1000,
 				config = function()
 					require("github-theme").setup({
 						-- ...
 					})
-
 					vim.cmd("colorscheme github_light_default")
 				end,
 			},
+
+			-- lualine
 
 			{
 				"nvim-lualine/lualine.nvim",
@@ -508,7 +474,6 @@ require("lazy").setup({
 							always_divide_middle = true,
 							globalstatus = true,
 						},
-
 						sections = {
 							lualine_a = { { "mode", icon = "" } },
 							lualine_b = {
@@ -531,7 +496,6 @@ require("lazy").setup({
 									},
 								},
 							},
-
 							lualine_x = {
 								{
 									function()
@@ -562,11 +526,9 @@ require("lazy").setup({
 								},
 								{ "filetype", icon_only = true },
 							},
-
 							lualine_y = { "progress" },
 							lualine_z = { { "location", icon = "" } },
 						},
-
 						inactive_sections = {
 							lualine_a = {},
 							lualine_b = {},
@@ -581,14 +543,26 @@ require("lazy").setup({
 							lualine_y = {},
 							lualine_z = {},
 						},
-
 						tabline = nil,
 						extensions = { "nvim-tree", "fugitive", "quickfix", "toggleterm", "man" },
 					})
 				end,
 			},
 
-			{ "tpope/vim-fugitive", event = "VeryLazy" },
+		},
+
+		-- git
+
+		{
+
+			-- vim fugitive
+
+			{
+				"tpope/vim-fugitive",
+				event = "VeryLazy",
+			},
+
+			-- git signs
 
 			{
 				"lewis6991/gitsigns.nvim",
@@ -624,60 +598,73 @@ require("lazy").setup({
 					})
 				end,
 			},
+
 		},
 
-		-- 1. Auto Pairs
-		{
-			"windwp/nvim-autopairs",
-			event = "InsertEnter",
-			config = function()
-				require("nvim-autopairs").setup()
-			end,
-		},
+		-- misc
 
-		-- 2. Commenting
 		{
-			"numToStr/Comment.nvim",
-			keys = { "gc", "gcc", "gbc" },
-			config = function()
-				require("Comment").setup()
-			end,
-		},
 
-		-- 3. Surround
-		{
-			"kylechui/nvim-surround",
-			event = "VeryLazy",
-			config = function()
-				require("nvim-surround").setup()
-			end,
-		},
+			-- auto pairs
 
-		-- 13. Copilot
-		{
-			"github/copilot.vim",
-			event = "InsertEnter",
-			config = function()
-				vim.g.copilot_no_tab_map = true
-				vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', {
-					expr = true,
-					silent = true,
-					replace_keycodes = false,
-				})
-			end,
-		},
-
-		-- 17. Tmux Navigator
-		{
-			"christoomey/vim-tmux-navigator",
-			lazy = false,
-			keys = {
-				{ "<C-h>", "<cmd>TmuxNavigateLeft<cr>" },
-				{ "<C-j>", "<cmd>TmuxNavigateDown<cr>" },
-				{ "<C-k>", "<cmd>TmuxNavigateUp<cr>" },
-				{ "<C-l>", "<cmd>TmuxNavigateRight<cr>" },
+			{
+				"windwp/nvim-autopairs",
+				event = "InsertEnter",
+				config = function()
+					require("nvim-autopairs").setup()
+				end,
 			},
+
+			-- commenting
+
+			{
+				"numToStr/Comment.nvim",
+				keys = { "gc", "gcc", "gbc" },
+				config = function()
+					require("Comment").setup()
+				end,
+			},
+
+			-- surround
+
+			{
+				"kylechui/nvim-surround",
+				event = "VeryLazy",
+				config = function()
+					require("nvim-surround").setup()
+				end,
+			},
+
+			-- copilot
+
+			{
+				"github/copilot.vim",
+				event = "InsertEnter",
+				config = function()
+					vim.g.copilot_no_tab_map = true
+					vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', {
+						expr = true,
+						silent = true,
+						replace_keycodes = false,
+					})
+				end,
+			},
+
+			-- vim tmux navigator
+
+			{
+				"christoomey/vim-tmux-navigator",
+				lazy = false,
+				keys = {
+					{ "<C-h>", "<cmd>TmuxNavigateLeft<cr>" },
+					{ "<C-j>", "<cmd>TmuxNavigateDown<cr>" },
+					{ "<C-k>", "<cmd>TmuxNavigateUp<cr>" },
+					{ "<C-l>", "<cmd>TmuxNavigateRight<cr>" },
+				},
+			},
+
 		},
+
 	},
 
 	-- automatically check for plugin updates
