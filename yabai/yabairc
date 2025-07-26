@@ -23,9 +23,4 @@ yabai -m rule --add app="^Discord$" manage=off
 yabai -m rule --add app="^Telegram$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Mail$" manage=off
-yabai -m rule --add app="^WhatsApp.*$" \
-         role="AXLayoutArea" \
-         subrole="AXFloatingWindow" \
-         manage=on \
-         display=^1 \
-         grid=1:1:0:0:1:1
+yabai -m rule --add app="^WhatsApp.*$" manage=off
