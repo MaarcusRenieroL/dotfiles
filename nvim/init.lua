@@ -179,6 +179,18 @@ require("lazy").setup({
 
 		{
 
+			-- markdown live preview
+
+			{
+				"MeanderingProgrammer/render-markdown.nvim",
+				dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+				-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+				-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+				---@module 'render-markdown'
+				---@type render.md.UserConfig
+				opts = {},
+			},
+
 			-- java lsp
 
 			{
@@ -491,9 +503,6 @@ require("lazy").setup({
 					dashboard.section.footer.val = function()
 						local stats = require("lazy").stats()
 						return {
-							"",
-							"",
-							"",
 							"⚡ Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins",
 							"",
 							" " .. os.date("%A, %B %d"),
