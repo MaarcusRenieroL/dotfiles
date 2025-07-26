@@ -4,8 +4,8 @@ options=(
 	style=round
 	width=6.0
 	hidpi=off
-	active_color=0xffff3c3c      # Fiery red glow (active)
-	inactive_color=0xff1a0f1a    # Deep shadow purple (inactive)
+	active_color=0xffe2e2e3
+	inactive_color=0xff414550
 )
 
 borders "${options[@]}"
