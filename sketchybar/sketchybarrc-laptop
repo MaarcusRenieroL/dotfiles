@@ -7,9 +7,10 @@ PLUGIN_SHARED_DIR="$HOME/.config/sketchybar/plugins"
 
 SPOTIFY_EVENT="com.spotify.client.PlaybackStateChanged"
 
+# --- BAR SETUP ---
 sketchybar --bar \
     height=37 \
-    color=0x00000000 \
+    color=0xccf2f4f8 \
     margin=0 \
     sticky=on \
     padding_left=23 \
@@ -17,38 +18,39 @@ sketchybar --bar \
     notch_width=188 \
     display=main
 
-# Alternatiive background colors
-# label.color=0xffffffff
-# background.color=0x9924273a
+# --- DEFAULT STYLING ---
 sketchybar --default \
-    background.color=0x66494d64 \
+    background.color=0x66dbe9f4 \
     background.corner_radius=5 \
     background.padding_right=5 \
     background.height=26 \
     icon.font="$FONT_FACE:Medium:15.0" \
     icon.padding_left=5 \
     icon.padding_right=5 \
+    icon.color=0xff4b5768 \
     label.font="$FONT_FACE:Medium:12.0" \
-    label.color=0xffcad3f5 \
+    label.color=0xff3a3a3a \
     label.y_offset=0 \
     label.padding_left=0 \
     label.padding_right=5
 
+# --- CURRENT SPACE ---
 sketchybar --add item current_space left \
     --set current_space \
-    background.color=0xfff5a97f \
-    icon.color=0xff24273a \
+    background.color=0xff9ae5b0 \
+    icon.color=0xff2b2b2b \
     label.drawing=off \
     script="$PLUGIN_SHARED_DIR/current_space.sh" \
     --subscribe current_space space_change mouse.clicked
 
+# --- FRONT APP ---
 sketchybar --add item front_app left \
     --set front_app \
-    background.color=0xffa6da95 \
+    background.color=0xff79a8f4 \
     background.padding_left=0 \
     background.padding_right=0 \
     icon.y_offset=1 \
-    icon.color=0xff24273a \
+    icon.color=0xff2e2e2e \
     label.drawing=no \
     script="$PLUGIN_SHARED_DIR/front_app.sh" \
     --add item front_app.separator left \
@@ -56,7 +58,7 @@ sketchybar --add item front_app left \
     background.color=0x00000000 \
     background.padding_left=-3 \
     icon= \
-    icon.color=0xffa6da95 \
+    icon.color=0xff79a8f4 \
     icon.font="$FONT_FACE:Bold:20.0" \
     icon.padding_left=0 \
     icon.padding_right=0 \
@@ -68,6 +70,7 @@ sketchybar --add item front_app left \
     background.padding_right=0 \
     icon.drawing=off \
     label.font="$FONT_FACE:Bold:12.0" \
+    label.color=0xff3a3a3a \
     label.drawing=yes
 
 sketchybar --add bracket front_app_bracket \
@@ -76,40 +79,41 @@ sketchybar --add bracket front_app_bracket \
     front_app.name \
     --subscribe front_app front_app_switched
 
+# --- CLOCK ---
 sketchybar --add item clock right \
     --set clock \
     icon=󰃰 \
-    icon.color=0xffed8796 \
+    icon.color=0xff7dc7d9 \
     update_freq=10 \
     script="$PLUGIN_SHARED_DIR/clock.sh"
 
+# --- BATTERY ---
 sketchybar --add item battery right \
     --set battery \
     update_freq=20 \
     script="$PLUGIN_DIR/battery.sh"
 
+# --- VOLUME ---
 sketchybar --add item volume right \
     --set volume \
-    icon.color=0xff8aadf4 \
+    icon.color=0xff79a8f4 \
     label.drawing=true \
     script="$PLUGIN_SHARED_DIR/volume.sh" \
     --subscribe volume volume_change
 
+# --- SPOTIFY ---
 sketchybar --add event spotify_change $SPOTIFY_EVENT \
     --add item spotify right e \
     --set spotify \
     icon= \
     icon.y_offset=1 \
     icon.font="$FONT_FACE:Bold:20.0" \
+    icon.color=0x000000 \
     label.drawing=off \
     label.padding_left=3 \
     script="$PLUGIN_DIR/spotify.sh" \
     --subscribe spotify spotify_change mouse.clicked
 
-
-# osascript -e 'quit app "Rectangle"'
-# open -a Rectangle
-
-##### Finalizing Setup #####
+# --- FINALIZE ---
 sketchybar --update
 sketchybar --trigger space_change
