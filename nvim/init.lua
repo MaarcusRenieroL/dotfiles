@@ -432,6 +432,17 @@ require("lazy").setup({
 					require("ibl").setup({ indent = { highlight = highlight } })
 				end,
 			},
+
+			-- trouble
+
+			{
+				"folke/trouble.nvim",
+				dependencies = { "nvim-tree/nvim-web-devicons" },
+				config = function()
+					require("trouble").setup()
+					k("n", "<leader>tt", "<cmd>Trouble<CR>", { desc = "Open/close trouble list" })
+				end,
+			},
 		},
 
 		-- treesitter
@@ -715,6 +726,24 @@ require("lazy").setup({
 						keymap("n", ("<leader>%d"):format(i), ("<Cmd>BufferLineGoToBuffer %d<CR>"):format(i), opts)
 					end
 				end,
+			},
+
+			-- noice
+
+			{
+				"folke/noice.nvim",
+				event = "VeryLazy",
+				opts = {
+					-- add any options here
+				},
+				dependencies = {
+					-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+					"MunifTanjim/nui.nvim",
+					-- OPTIONAL:
+					--   `nvim-notify` is only needed, if you want to use the notification view.
+					--   If not available, we use `mini` as the fallback
+					"rcarriga/nvim-notify",
+				},
 			},
 		},
 
