@@ -7,3 +7,4 @@ tmux/plugins
 zed
 configstore
 github-copilot
+nvim/lazy-lock.json

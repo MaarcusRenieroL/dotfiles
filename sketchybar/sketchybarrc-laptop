@@ -39,7 +39,7 @@ sketchybar --add item current_space left \
     --set current_space \
     background.color=0xff9ae5b0 \
     icon.color=0xff2b2b2b \
-    label.drawing=off \
+    label.drawing=on \
     script="$PLUGIN_SHARED_DIR/current_space.sh" \
     --subscribe current_space space_change mouse.clicked
 
