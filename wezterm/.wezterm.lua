@@ -3,7 +3,7 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder();
 
 -- font
-config.font = wezterm.font 'GeistMono Nerd Font'
+config.font = wezterm.font 'GeistMono Nerd Font Propo'
 config.font_size = 16
 
 -- theme
@@ -16,7 +16,6 @@ config.native_macos_fullscreen_mode = false
 config.window_decorations = 'RESIZE'
 
 -- cursor
-config.default_cursor_style = 'BlinkingBlock'
 config.cursor_blink_rate = 700
 
 -- tabs
