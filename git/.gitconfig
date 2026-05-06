@@ -1,0 +1,12 @@
+[user]
+	name = Maarcus Reniero L
+	email = maarcusreniero.l@gmail.com
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = nvim
+
+[pull]
+	rebase = false
