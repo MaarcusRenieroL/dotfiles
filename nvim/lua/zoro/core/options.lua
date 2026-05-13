@@ -25,7 +25,7 @@ opt.splitright = true
 opt.splitbelow = true
 
 -- clipboard
--- opt.clipboard = "unamedplus"
+opt.clipboard = "unnamedplus"
 
 -- update time
 opt.updatetime = 50
@@ -35,4 +35,3 @@ opt.cursorline = true
 
 -- mouse
 opt.mouse = "a"
-
