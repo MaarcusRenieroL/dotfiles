@@ -1,22 +1,42 @@
 return {
-  {
-    "nvim-telescope/telescope.nvim",
+	{
+		"nvim-telescope/telescope.nvim",
 
-    dependencies = {
-      "nvim-lua/plenary.nvim"
-    },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
 
-    config = function()
-      local telescope = require("telescope")
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+			},
 
-      telescope.setup({})
+			"nvim-telescope/telescope-ui-select.nvim",
+		},
 
-      local k = vim.keymap.set
+		config = function()
+			local telescope = require("telescope")
+			local builtin = require("telescope.builtin")
 
-      k("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
-      k("n", "<leader>fg", "<cmd>Telescope live_grep<CR>")
-      k("n", "<leader>fb", "<cmd>Telescope buffers<CR>")
-      k("n", "<leader>fh", "<cmd>Telescope help_tags<CR>")
-    end
-  }
+			telescope.setup({
+				extensions = {
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown({}),
+					},
+				},
+			})
+
+			pcall(telescope.load_extension, "fzf")
+			pcall(telescope.load_extension, "ui-select")
+
+			local k = vim.keymap.set
+
+			k("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
+			k("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
+			k("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
+			k("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
+			k("n", "<leader>fr", builtin.oldfiles, { desc = "Recent files" })
+			k("n", "<leader>fc", builtin.grep_string, { desc = "Find word under cursor" })
+			k("n", "<leader>fk", builtin.keymaps, { desc = "Find keymaps" })
+		end,
+	},
 }
