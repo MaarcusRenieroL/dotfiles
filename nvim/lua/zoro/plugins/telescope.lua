@@ -18,6 +18,14 @@ return {
 			local builtin = require("telescope.builtin")
 
 			telescope.setup({
+				defaults = {
+					file_ignore_patterns = {
+						"node_modules",
+						".git/",
+						"dist/",
+						"build/",
+					},
+				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
@@ -37,6 +45,7 @@ return {
 			k("n", "<leader>fr", builtin.oldfiles, { desc = "Recent files" })
 			k("n", "<leader>fc", builtin.grep_string, { desc = "Find word under cursor" })
 			k("n", "<leader>fk", builtin.keymaps, { desc = "Find keymaps" })
+			k("n", "<leader>fd", builtin.diagnostics, { desc = "Find diagnostics" })
 		end,
 	},
 }

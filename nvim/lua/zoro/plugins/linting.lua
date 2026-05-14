@@ -15,9 +15,10 @@ return {
 			javascriptreact = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
 			sh = { "shellcheck" },
+			bash = { "shellcheck" },
 		}
 
-		local lint_group = vim.api.nvim_create_augroup("lint", { clear = true })
+		local lint_group = vim.api.nvim_create_augroup("zoro-lint", { clear = true })
 
 		vim.api.nvim_create_autocmd({
 			"BufEnter",
@@ -32,6 +33,6 @@ return {
 
 		vim.keymap.set("n", "<leader>l", function()
 			lint.try_lint()
-		end, { desc = "Trigger linting" })
+		end, { desc = "Run linting" })
 	end,
 }

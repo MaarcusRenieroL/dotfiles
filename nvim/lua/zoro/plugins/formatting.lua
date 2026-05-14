@@ -1,38 +1,46 @@
 return {
-  {
-    "stevearc/conform.nvim",
+	{
+		"stevearc/conform.nvim",
 
-    event = { "BufWritePre" },
+		event = {
+			"BufWritePre",
+		},
 
-    config = function()
-      require("conform").setup({
-        formatters_by_ft = {
-          lua = { "stylua" },
+		config = function()
+			local conform = require("conform")
 
-          javascript = { "prettier" },
-          typescript = { "prettier" },
-          javascriptreact = { "prettier" },
-          typescriptreact = { "prettier" },
+			conform.setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
 
-          html = { "prettier" },
-          css = { "prettier" },
-          json = { "prettier" },
-          yaml = { "prettier" },
-          markdown = { "prettier" },
-        },
+					javascript = { "prettier" },
+					typescript = { "prettier" },
+					javascriptreact = { "prettier" },
+					typescriptreact = { "prettier" },
 
-        format_on_save = {
-          timeout_ms = 500,
-          lsp_fallback = true,
-        },
-      })
+					html = { "prettier" },
+					css = { "prettier" },
+					scss = { "prettier" },
+					json = { "prettier" },
+					yaml = { "prettier" },
+					markdown = { "prettier" },
 
-      vim.keymap.set("n", "<leader>fm", function()
-        require("conform").format({
-          async = true,
-          lsp_fallback = true,
-        })
-      end)
-    end,
-  },
+					sh = { "shfmt" },
+					bash = { "shfmt" },
+				},
+
+				format_on_save = {
+					timeout_ms = 1000,
+					lsp_fallback = true,
+				},
+			})
+
+			vim.keymap.set("n", "<leader>fm", function()
+				conform.format({
+					async = true,
+					lsp_fallback = true,
+				})
+			end, { desc = "Format file" })
+		end,
+	},
 }

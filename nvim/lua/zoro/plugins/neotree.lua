@@ -18,9 +18,12 @@ return {
 						hide_gitignored = false,
 					},
 				},
+				window = {
+					width = 32,
+				},
 			})
 
-			vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>")
+			vim.keymap.set("n", "<C-n>", "<cmd>Neotree toggle<CR>", { desc = "Toggle file explorer" })
 		end,
 	},
 }

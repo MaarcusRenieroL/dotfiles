@@ -19,6 +19,8 @@ opt.termguicolors = true
 opt.signcolumn = "yes"
 opt.wrap = false
 opt.scrolloff = 8
+opt.sidescrolloff = 8
+opt.cursorline = true
 
 -- splits
 opt.splitright = true
@@ -29,9 +31,15 @@ opt.clipboard = "unnamedplus"
 
 -- update time
 opt.updatetime = 50
-
--- cursor line
-opt.cursorline = true
+opt.timeoutlen = 500
 
 -- mouse
 opt.mouse = "a"
+
+-- backups
+opt.swapfile = false
+opt.backup = false
+opt.writebackup = false
+
+-- completion
+opt.completeopt = { "menu", "menuone", "noselect" }

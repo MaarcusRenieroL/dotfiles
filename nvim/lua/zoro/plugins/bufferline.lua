@@ -21,11 +21,11 @@ return {
 
 		local k = vim.keymap.set
 
-		k("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>")
-		k("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>")
+		k("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer" })
+		k("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
 
-		k("n", "<leader>bd", "<cmd>bdelete<CR>")
-		k("n", "<leader>bp", "<cmd>BufferLinePick<CR>")
-		k("n", "<leader>bo", "<cmd>BufferLineCloseOthers<CR>")
+		k("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
+		k("n", "<leader>bp", "<cmd>BufferLinePick<CR>", { desc = "Pick buffer" })
+		k("n", "<leader>bo", "<cmd>BufferLineCloseOthers<CR>", { desc = "Close other buffers" })
 	end,
 }
