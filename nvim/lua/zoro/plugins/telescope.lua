@@ -18,10 +18,11 @@ return {
 			local builtin = require("telescope.builtin")
 
 			telescope.setup({
-				defaults = {
-					file_ignore_patterns = {
-						"node_modules",
-						".git/",
+					defaults = {
+						hidden = true,
+						file_ignore_patterns = {
+							"node_modules",
+							".git/",
 						"dist/",
 						"build/",
 					},
@@ -45,7 +46,11 @@ return {
 			k("n", "<leader>fr", builtin.oldfiles, { desc = "Recent files" })
 			k("n", "<leader>fc", builtin.grep_string, { desc = "Find word under cursor" })
 			k("n", "<leader>fk", builtin.keymaps, { desc = "Find keymaps" })
-			k("n", "<leader>fd", builtin.diagnostics, { desc = "Find diagnostics" })
-		end,
-	},
-}
+				k("n", "<leader>fd", builtin.diagnostics, { desc = "Find diagnostics" })
+				k("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find document symbols" })
+				k("n", "<leader>fw", builtin.lsp_dynamic_workspace_symbols, { desc = "Find workspace symbols" })
+				k("n", "<leader>gc", builtin.git_commits, { desc = "Find git commits" })
+				k("n", "<leader>gb", builtin.git_branches, { desc = "Find git branches" })
+			end,
+		},
+	}

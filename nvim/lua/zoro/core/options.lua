@@ -21,6 +21,9 @@ opt.wrap = false
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.cursorline = true
+opt.colorcolumn = "100"
+opt.laststatus = 3
+opt.pumheight = 12
 
 -- splits
 opt.splitright = true
@@ -43,3 +46,6 @@ opt.writebackup = false
 
 -- completion
 opt.completeopt = { "menu", "menuone", "noselect" }
+opt.inccommand = "split"
+opt.undofile = true
+opt.confirm = true
