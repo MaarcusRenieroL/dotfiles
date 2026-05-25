@@ -7,6 +7,44 @@
 
 [core]
 	editor = nvim
+	excludesfile = ~/.gitignore_global
 
 [pull]
-	rebase = false
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+	default = current
+
+[fetch]
+	prune = true
+
+[rebase]
+	autoStash = true
+
+[rerere]
+	enabled = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[diff]
+	colorMoved = default
+
+[delta]
+	navigate = true
+	line-numbers = true
+	side-by-side = false
+	features = catppuccin-mocha
+
+[alias]
+	co = checkout
+	sw = switch
+	st = status --short --branch
+	ci = commit
+	br = branch
+	ds = -c core.pager=delta diff --staged
+	d = -c core.pager=delta diff
+	lg = log --graph --decorate --oneline --all
+	last = log -1 HEAD --stat
+	uncommit = reset --soft HEAD~1
