@@ -1,20 +1,46 @@
-tap "FelixKratz/formulae"
+# Brewfile — install everything with: brew bundle --file brew/Brewfile
+# Check status: brew bundle check --file brew/Brewfile
 
-brew "borders"
-brew "delta"
-brew "eza"
-brew "fzf"
-brew "git"
-brew "lazygit"
-brew "neofetch"
-brew "neovim"
-brew "pnpm"
-brew "skhd"
+tap "FelixKratz/formulae"   # borders
+
+# --- Shell / prompt ----------------------------------------------------------
 brew "starship"
-brew "stow"
-brew "tmux"
-brew "tree-sitter-cli"
-brew "yabai"
 brew "zoxide"
+brew "fzf"
+brew "stow"
 
+# --- Core CLI ----------------------------------------------------------------
+brew "git"
+brew "gh"
+brew "delta"            # better git diffs
+brew "lazygit"
+brew "bat"
+brew "eza"
+brew "fd"
+brew "ripgrep"
+brew "jq"
+brew "tmux"
+brew "neofetch"
+
+# --- Editor ------------------------------------------------------------------
+brew "neovim"
+brew "tree-sitter-cli"
+
+# --- Languages / build tools -------------------------------------------------
+brew "node@24"
+brew "pnpm"
+brew "openjdk"
+brew "gradle"
+brew "maven"
+
+# --- macOS window management (FelixKratz + koekeishiya) ----------------------
+brew "yabai"
+brew "skhd"
+brew "borders"
+
+# --- Terminal ----------------------------------------------------------------
 cask "wezterm"
+
+# --- Fonts (required by wezterm config) --------------------------------------
+cask "font-jetbrains-mono"
+cask "font-symbols-only-nerd-font"
