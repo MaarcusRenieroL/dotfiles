@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Editor / swap junk
+*.swp
+*.swo
+*~
+
+# Homebrew bundle lock noise
+homebrew/
+*.lock
+
+# Local, machine-specific overrides (never committed)
+*.local
+zsh/local.zsh
+git/local.gitconfig
+
+# nvim plugin state we don't want to track here
+# (lazy-lock.json IS tracked on purpose for reproducible plugin versions)
