@@ -4,18 +4,40 @@ return {
 
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
+			"rafamadriz/friendly-snippets",
 		},
 
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 
+			-- Load the friendly-snippets VS Code-style snippet library
+			-- (covers JS/TS/React, Java, SQL, HTML/CSS, and more).
+			require("luasnip.loaders.from_vscode").lazy_load()
+
 			cmp.setup({
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
+					end,
+				},
+
+				formatting = {
+					format = function(entry, vim_item)
+						local source_labels = {
+							nvim_lsp = "[LSP]",
+							luasnip = "[Snippet]",
+							buffer = "[Buffer]",
+							path = "[Path]",
+						}
+
+						vim_item.menu = source_labels[entry.source.name]
+						return vim_item
 					end,
 				},
 
@@ -49,7 +71,19 @@ return {
 
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
+					{ name = "path" },
+				}, {
 					{ name = "luasnip" },
+					{ name = "buffer", keyword_length = 3 },
+				}),
+			})
+
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{ name = "cmdline" },
 				}),
 			})
 		end,

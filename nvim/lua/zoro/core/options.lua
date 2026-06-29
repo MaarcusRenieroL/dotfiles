@@ -13,6 +13,8 @@ opt.smartindent = true
 -- search
 opt.ignorecase = true
 opt.smartcase = true
+opt.grepprg = "rg --vimgrep --smart-case --hidden"
+opt.grepformat = "%f:%l:%c:%m"
 
 -- appearance
 opt.termguicolors = true
@@ -24,6 +26,12 @@ opt.cursorline = true
 opt.colorcolumn = "100"
 opt.laststatus = 3
 opt.pumheight = 12
+opt.list = true
+opt.listchars = {
+	tab = "> ",
+	trail = ".",
+	nbsp = "+",
+}
 
 -- splits
 opt.splitright = true
@@ -49,3 +57,5 @@ opt.completeopt = { "menu", "menuone", "noselect" }
 opt.inccommand = "split"
 opt.undofile = true
 opt.confirm = true
+opt.jumpoptions = "stack"
+opt.shortmess:append("c")

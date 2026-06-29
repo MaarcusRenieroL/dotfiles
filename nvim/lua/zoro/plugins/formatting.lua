@@ -21,16 +21,26 @@ return {
 					html = { "prettier" },
 					css = { "prettier" },
 					scss = { "prettier" },
+					less = { "prettier" },
 					json = { "prettier" },
+					jsonc = { "prettier" },
 					yaml = { "prettier" },
 					markdown = { "prettier" },
+					["markdown.mdx"] = { "prettier" },
+					graphql = { "prettier" },
+					prisma = { "prisma_format" },
+
+					java = { "google-java-format" },
+
+					sql = { "sql_formatter" },
+					mysql = { "sql_formatter" },
 
 					sh = { "shfmt" },
 					bash = { "shfmt" },
 				},
 
 				format_on_save = {
-					timeout_ms = 1000,
+					timeout_ms = 2000,
 					lsp_fallback = true,
 				},
 			})
