@@ -10,3 +10,5 @@ build/
 .cache/
 coverage/
 *.log
+
+**/.claude/settings.local.json

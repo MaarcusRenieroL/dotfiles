@@ -8,6 +8,10 @@
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
 
 [pull]
 	rebase = true
@@ -48,3 +52,11 @@
 	lg = log --graph --decorate --oneline --all
 	last = log -1 HEAD --stat
 	uncommit = reset --soft HEAD~1
+
+# Theme definition for the `catppuccin-mocha` delta feature above.
+[include]
+	path = ~/dotfiles/git/themes/catppuccin.gitconfig
+
+# Optional machine-local overrides (gitignored, skipped if absent).
+[include]
+	path = ~/dotfiles/git/local.gitconfig
