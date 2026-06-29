@@ -1,46 +1,74 @@
 # Brewfile — install everything with: brew bundle --file brew/Brewfile
 # Check status: brew bundle check --file brew/Brewfile
+#
+# Regenerate from the current machine with: brew bundle dump --file brew/Brewfile --force
 
-tap "FelixKratz/formulae"   # borders
+# --- Taps --------------------------------------------------------------------
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
+tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git"
 
 # --- Shell / prompt ----------------------------------------------------------
 brew "starship"
 brew "zoxide"
 brew "fzf"
 brew "stow"
+brew "zsh"
+brew "direnv"
 
 # --- Core CLI ----------------------------------------------------------------
 brew "git"
 brew "gh"
-brew "delta"            # better git diffs
+brew "git-delta"        # better git diffs
 brew "lazygit"
 brew "bat"
+brew "btop"
 brew "eza"
 brew "fd"
 brew "ripgrep"
-brew "jq"
 brew "tmux"
 brew "neofetch"
+brew "cloudflared"
+brew "redis"
+brew "stylua"
 
 # --- Editor ------------------------------------------------------------------
 brew "neovim"
+brew "tree-sitter"
 brew "tree-sitter-cli"
 
 # --- Languages / build tools -------------------------------------------------
 brew "node@24"
 brew "pnpm"
 brew "openjdk"
-brew "gradle"
+brew "openjdk@21"
 brew "maven"
 
-# --- macOS window management (FelixKratz + koekeishiya) ----------------------
-brew "yabai"
-brew "skhd"
-brew "borders"
-
-# --- Terminal ----------------------------------------------------------------
+# --- GUI apps (casks) --------------------------------------------------------
+cask "1password"
+cask "chatgpt"
+cask "claude"
+cask "claude-code"
+cask "codex"
+cask "discord"
+cask "docker-desktop"
+cask "firefox"
+cask "ghostty"
+cask "google-chrome"
+cask "insomnia"
+cask "intellij-idea"
+cask "localsend"
+cask "notion"
+cask "notion-calendar"
+cask "raycast"
+cask "scroll-reverser"
+cask "spotify"
+cask "telegram"
+cask "visual-studio-code"
+cask "vlc"
+cask "webstorm"
 cask "wezterm"
+cask "whatsapp"
+cask "zoom"
 
-# --- Fonts (required by wezterm config) --------------------------------------
-cask "font-jetbrains-mono"
-cask "font-symbols-only-nerd-font"
+# --- Fonts -------------------------------------------------------------------
+cask "font-jetbrains-mono-nerd-font"
