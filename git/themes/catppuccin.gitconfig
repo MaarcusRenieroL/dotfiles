@@ -1,0 +1,23 @@
+# Catppuccin Mocha theme for delta.
+# Referenced from ~/.gitconfig via `features = catppuccin-mocha`.
+# Self-contained (no external bat/delta theme install required).
+[delta "catppuccin-mocha"]
+    minus-style                   = syntax "#45342f"
+    minus-non-emph-style          = syntax "#45342f"
+    minus-emph-style              = syntax "#653235"
+    minus-empty-line-marker-style = syntax "#45342f"
+    line-numbers-minus-style      = "#f38ba8"
+    plus-style                    = syntax "#2f3d35"
+    plus-non-emph-style           = syntax "#2f3d35"
+    plus-emph-style               = syntax "#36523f"
+    plus-empty-line-marker-style  = syntax "#2f3d35"
+    line-numbers-plus-style       = "#a6e3a1"
+    line-numbers-zero-style       = "#6c7086"
+    zero-style                    = syntax
+    whitespace-error-style        = "#2d3f76" reverse
+    file-style                    = "#cdd6f4" bold
+    file-decoration-style         = "#9399b2" ul
+    hunk-header-style             = line-number syntax
+    hunk-header-decoration-style  = "#313244" box
+    hunk-header-line-number-style = "#bac2de"
+    blame-palette                 = "#1e1e2e" "#181825" "#11111b" "#313244" "#45475a"
