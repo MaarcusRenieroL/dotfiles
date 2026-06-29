@@ -47,6 +47,9 @@ return {
 			vim.keymap.set("n", "<C-n>", "<cmd>Neotree toggle<CR>", {
 				desc = "Toggle file explorer",
 			})
+			vim.keymap.set("n", "<leader>fe", "<cmd>Neotree reveal<CR>", {
+				desc = "Reveal file explorer",
+			})
 		end,
 	},
 }

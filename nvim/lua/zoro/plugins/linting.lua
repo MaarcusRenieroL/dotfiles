@@ -16,6 +16,9 @@ return {
 			typescriptreact = { "eslint_d" },
 			sh = { "shellcheck" },
 			bash = { "shellcheck" },
+			markdown = { "markdownlint-cli2" },
+			["markdown.mdx"] = { "markdownlint-cli2" },
+			dockerfile = { "hadolint" },
 		}
 
 		local lint_group = vim.api.nvim_create_augroup("zoro-lint", { clear = true })
