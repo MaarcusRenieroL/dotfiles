@@ -64,12 +64,27 @@ fi
 # --- 5. Remove Homebrew packages -----------------------------------------------
 hr "Homebrew packages"
 if [ "$BREW_MODE" = "yes" ]; then
-  info "Removing all Homebrew packages..."
-  # Note: brew bundle doesn't support --cleanup, so we skip removal
-  # You can manually uninstall packages with: brew uninstall <package>
-  info "Note: Homebrew packages must be uninstalled manually."
-  info "Use: brew uninstall <package-name>"
-  ok "Skipped (manual removal needed)."
+  info "Removing all Homebrew packages and casks..."
+
+  # Extract and remove all brew packages
+  while IFS= read -r line; do
+    if [[ $line =~ ^brew\ \"([^\"]+)\" ]]; then
+      pkg="${BASH_REMATCH[1]}"
+      info "Removing brew package: $pkg"
+      brew uninstall --force "$pkg" 2>/dev/null || true
+    fi
+  done < "$DOTFILES/brew/Brewfile"
+
+  # Extract and remove all casks
+  while IFS= read -r line; do
+    if [[ $line =~ ^cask\ \"([^\"]+)\" ]]; then
+      cask="${BASH_REMATCH[1]}"
+      info "Removing cask: $cask"
+      brew uninstall --cask --force "$cask" 2>/dev/null || true
+    fi
+  done < "$DOTFILES/brew/Brewfile"
+
+  ok "Homebrew packages and casks removed."
 else
   info "Skipped (use --keep-brew to keep packages)."
 fi
