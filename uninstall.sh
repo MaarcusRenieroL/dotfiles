@@ -65,7 +65,7 @@ fi
 hr "Homebrew packages"
 if [ "$BREW_MODE" = "yes" ]; then
   info "Removing all Homebrew packages..."
-  brew bundle --file "$DOTFILES/brew/Brewfile" --no-lock --cleanup --force
+  brew bundle --file "$DOTFILES/brew/Brewfile" --cleanup --force
   ok "Homebrew packages removed."
 else
   info "Skipped (use --keep-brew to keep packages)."
