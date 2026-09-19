@@ -65,8 +65,11 @@ fi
 hr "Homebrew packages"
 if [ "$BREW_MODE" = "yes" ]; then
   info "Removing all Homebrew packages..."
-  brew bundle --file "$DOTFILES/brew/Brewfile" --cleanup --force
-  ok "Homebrew packages removed."
+  # Note: brew bundle doesn't support --cleanup, so we skip removal
+  # You can manually uninstall packages with: brew uninstall <package>
+  info "Note: Homebrew packages must be uninstalled manually."
+  info "Use: brew uninstall <package-name>"
+  ok "Skipped (manual removal needed)."
 else
   info "Skipped (use --keep-brew to keep packages)."
 fi
