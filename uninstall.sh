@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # One-command uninstall for dotfiles setup.
-# Reverses what install.sh did.
+# Completely removes everything installed by install.sh.
 #
-#   ./uninstall.sh            remove dotfiles (keeps Homebrew packages)
-#   ./uninstall.sh --brew     also remove Homebrew packages
+#   ./uninstall.sh            full uninstall (removes everything)
+#   ./uninstall.sh --keep-brew keep Homebrew packages installed
 #   ./uninstall.sh --help
 set -euo pipefail
 
@@ -12,10 +12,10 @@ export DOTFILES
 # shellcheck source=scripts/lib.sh
 source "$DOTFILES/scripts/lib.sh"
 
-BREW_MODE="no"   # yes | no
+BREW_MODE="yes"   # yes | no
 for arg in "$@"; do
   case "$arg" in
-    --brew)     BREW_MODE="yes" ;;
+    --keep-brew) BREW_MODE="no" ;;
     --help|-h)
       grep '^#' "$0" | sed 's/^# \{0,1\}//; 1d'
       exit 0 ;;
@@ -50,16 +50,14 @@ else
   ok "tpm not found."
 fi
 
-# --- 4. Remove Homebrew packages (optional) --------------------------------
+# --- 4. Remove Homebrew packages -----------------------------------------------
 hr "Homebrew packages"
 if [ "$BREW_MODE" = "yes" ]; then
-  if confirm "Remove all Homebrew packages from Brewfile?"; then
-    info "Removing packages..."
-    brew bundle --file "$DOTFILES/brew/Brewfile" --no-lock --cleanup --force
-    ok "Homebrew packages removed."
-  fi
+  info "Removing all Homebrew packages..."
+  brew bundle --file "$DOTFILES/brew/Brewfile" --no-lock --cleanup --force
+  ok "Homebrew packages removed."
 else
-  info "Skipped (use --brew to remove packages)."
+  info "Skipped (use --keep-brew to keep packages)."
 fi
 
 hr "Done"
