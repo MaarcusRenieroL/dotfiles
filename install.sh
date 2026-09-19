@@ -42,6 +42,11 @@ hr "Brew bundle"
 brew bundle --file "$DOTFILES/brew/Brewfile"
 ok "Brewfile satisfied."
 
+# --- 2b. macOS Window Management Tools ----------------------------------------
+hr "macOS WM tools"
+brew install yabai skhd borders
+ok "yabai, skhd, borders installed."
+
 # --- 3. oh-my-zsh + plugins --------------------------------------------------
 hr "oh-my-zsh"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
