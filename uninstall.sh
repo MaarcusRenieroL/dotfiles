@@ -50,7 +50,18 @@ else
   ok "tpm not found."
 fi
 
-# --- 4. Remove Homebrew packages -----------------------------------------------
+# --- 4. Remove Docker containers -----------------------------------------------
+hr "Docker containers"
+if [ -f "$DOTFILES/docker-compose.yml" ]; then
+  info "Stopping and removing Docker containers..."
+  cd "$DOTFILES"
+  docker-compose down -v 2>/dev/null || true
+  ok "Docker containers removed."
+else
+  ok "No docker-compose.yml found."
+fi
+
+# --- 5. Remove Homebrew packages -----------------------------------------------
 hr "Homebrew packages"
 if [ "$BREW_MODE" = "yes" ]; then
   info "Removing all Homebrew packages..."

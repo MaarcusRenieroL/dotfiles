@@ -87,7 +87,14 @@ case "$MACOS_MODE" in
     fi ;;
 esac
 
-# --- 7. Health check ---------------------------------------------------------
+# --- 7. Docker setup --------------------------------------------------------
+if confirm "Setup Docker containers (PostgreSQL, MySQL, Redis, Java, Node.js)?"; then
+  bash "$DOTFILES/scripts/docker-setup.sh"
+else
+  info "Skipped Docker setup. Run later with: bash scripts/docker-setup.sh"
+fi
+
+# --- 8. Health check ---------------------------------------------------------
 bash "$DOTFILES/scripts/doctor.sh" || true
 
 hr "Done"

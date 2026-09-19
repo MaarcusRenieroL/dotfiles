@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # Java development container
+  java:
+    image: openjdk:21-jdk
+    container_name: java-dev
+    volumes:
+      - $HOME/.m2:/root/.m2  # Maven cache
+    working_dir: /workspace
+    volumes:
+      - $HOME/workspace:/workspace
+    tty: true
+    stdin_open: true
+
+  # Node.js development container
+  node:
+    image: node:24-alpine
+    container_name: node-dev
+    volumes:
+      - $HOME/.npm:/root/.npm
+      - $HOME/workspace:/workspace
+    working_dir: /workspace
+    tty: true
+    stdin_open: true
+
+  # PostgreSQL database
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dev_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MySQL database
+  mysql:
+    image: mysql:latest
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: dev_user
+      MYSQL_PASSWORD: dev_password
+      MYSQL_DATABASE: dev_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis cache
+  redis:
+    image: redis:latest
+    container_name: redis-cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  mysql_data:
+  redis_data:
