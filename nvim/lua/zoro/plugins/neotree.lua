@@ -11,6 +11,16 @@ return {
 
 		config = function()
 			require("neo-tree").setup({
+				popup_border_style = "rounded",
+				default_component_configs = {
+					indent = { with_markers = true, indent_marker = "│", last_indent_marker = "└" },
+					git_status = {
+						symbols = {
+							added = "", modified = "", deleted = "", renamed = "󰁕",
+							untracked = "", ignored = "", unstaged = "󰄱", staged = "", conflict = "",
+						},
+					},
+				},
 				filesystem = {
 					filtered_items = {
 						visible = true,

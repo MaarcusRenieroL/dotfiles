@@ -9,10 +9,15 @@ return {
 
 	config = function()
 		require("bufferline").setup({
+			highlights = require("catppuccin.special.bufferline").get_theme(),
 			options = {
 				mode = "buffers",
 				diagnostics = "nvim_lsp",
-				separator_style = "slant",
+				indicator = { style = "underline" },
+				offsets = {
+					{ filetype = "neo-tree", text = "  explorer", text_align = "left", separator = false },
+				},
+				separator_style = "thin",
 				show_buffer_close_icons = false,
 				show_close_icon = false,
 				always_show_bufferline = false,

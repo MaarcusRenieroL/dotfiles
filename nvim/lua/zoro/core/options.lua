@@ -28,10 +28,13 @@ opt.laststatus = 3
 opt.pumheight = 12
 opt.list = true
 opt.listchars = {
-	tab = "> ",
-	trail = ".",
+	tab = "» ",
+	trail = "·",
 	nbsp = "+",
 }
+opt.fillchars = { eob = " ", vert = "│", horiz = "─", fold = " " }
+opt.winborder = "rounded"
+opt.cursorlineopt = "both"
 
 -- splits
 opt.splitright = true

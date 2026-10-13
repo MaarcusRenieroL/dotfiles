@@ -7,7 +7,7 @@ return {
 		config = function()
 			local wk = require("which-key")
 
-			wk.setup()
+			wk.setup({ preset = "modern", win = { border = "rounded" } })
 
 			wk.add({
 				{ "<leader>b", group = "Buffer/Breakpoint" },
@@ -18,6 +18,8 @@ return {
 				{ "<leader>h", group = "Git hunks" },
 				{ "<leader>j", group = "Java" },
 				{ "<leader>m", group = "Marks" },
+				{ "<leader>n", group = "Notify/No-hl" },
+				{ "<leader>S", group = "Session" },
 				{ "<leader>s", group = "Split" },
 				{ "<leader>t", group = "Toggle/Todo" },
 				{ "<leader>w", group = "Window/Write" },
