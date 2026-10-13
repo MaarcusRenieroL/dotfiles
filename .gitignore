@@ -17,3 +17,8 @@ git/local.gitconfig
 
 # nvim plugin state we don't want to track here
 # (lazy-lock.json IS tracked on purpose for reproducible plugin versions)
+
+# Tool state / credentials that live next to the dotfiles (never commit)
+.android/
+configstore/
+gh/
