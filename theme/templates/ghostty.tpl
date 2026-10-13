@@ -1,0 +1,24 @@
+# OUT: ghostty/themes/zoro
+# @@GENERATED@@
+background = @BG_BARE@
+foreground = @FG_BARE@
+cursor-color = @ACCENT_BARE@
+cursor-text = @BG_BARE@
+selection-background = @SURFACE_BARE@
+selection-foreground = @FG_BARE@
+palette = 0=@CARD@
+palette = 1=@RED@
+palette = 2=@ACCENT@
+palette = 3=@AMBER@
+palette = 4=@BLUE@
+palette = 5=@VIOLET@
+palette = 6=@CYAN@
+palette = 7=@SUBTEXT@
+palette = 8=@SURFACE2@
+palette = 9=@RED_BRIGHT@
+palette = 10=@ACCENT_BRIGHT@
+palette = 11=@AMBER_BRIGHT@
+palette = 12=@BLUE_BRIGHT@
+palette = 13=@VIOLET_BRIGHT@
+palette = 14=@CYAN_BRIGHT@
+palette = 15=@FG@

@@ -1,0 +1,23 @@
+# GENERATED from theme/palette.env by theme/apply.py - do not edit by hand
+background = 0b1219
+foreground = e6eaef
+cursor-color = 34d399
+cursor-text = 0b1219
+selection-background = 1c2833
+selection-foreground = e6eaef
+palette = 0=#111a23
+palette = 1=#f87171
+palette = 2=#34d399
+palette = 3=#fbbf24
+palette = 4=#60a5fa
+palette = 5=#a78bfa
+palette = 6=#2dd4bf
+palette = 7=#c5ced8
+palette = 8=#2a3744
+palette = 9=#fca5a5
+palette = 10=#6ee7b7
+palette = 11=#fcd34d
+palette = 12=#93c5fd
+palette = 13=#c4b5fd
+palette = 14=#5eead4
+palette = 15=#e6eaef

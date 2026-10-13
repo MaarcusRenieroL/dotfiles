@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+source "${DOTFILES:-$HOME/dotfiles}/borders/colors.sh"
+
 options=(
   style=round
-  width=5.0
+  width=2.0
   hidpi=on
-  active_color=0xff89b4fa
-  inactive_color=0xff45475a
+  active_color=$BORDER_ACTIVE
+  inactive_color=$BORDER_INACTIVE
 )
 
 borders "${options[@]}"

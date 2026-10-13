@@ -39,7 +39,7 @@
 	navigate = true
 	line-numbers = true
 	side-by-side = false
-	features = catppuccin-mocha
+	features = zoro
 
 [alias]
 	co = checkout
@@ -53,9 +53,9 @@
 	last = log -1 HEAD --stat
 	uncommit = reset --soft HEAD~1
 
-# Theme definition for the `catppuccin-mocha` delta feature above.
+# Theme definition for the `zoro` delta feature above.
 [include]
-	path = ~/dotfiles/git/themes/catppuccin.gitconfig
+	path = ~/dotfiles/git/themes/zoro.gitconfig
 
 # Optional machine-local overrides (gitignored, skipped if absent).
 [include]
