@@ -1,0 +1,5 @@
+@-moz-document url(about:home), url(about:newtab), url(about:blank), url-prefix(about:privatebrowsing) {
+  :root { --newtab-background-color: #0b1219 !important; --newtab-background-color-secondary: #111a23 !important;
+          --newtab-text-primary-color: #e6eaef !important; }
+  body { background: #0b1219 !important; }
+}

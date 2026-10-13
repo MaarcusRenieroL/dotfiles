@@ -1,0 +1,12 @@
+{
+  "workbench.colorTheme": "Zoro",
+  "editor.fontFamily": "'GeistMono Nerd Font Mono', Menlo, monospace",
+  "editor.fontSize": 14,
+  "editor.fontLigatures": false,
+  "terminal.integrated.fontFamily": "'GeistMono Nerd Font Mono'",
+  "editor.cursorBlinking": "smooth",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.minimap.enabled": false,
+  "window.titleBarStyle": "custom",
+  "workbench.startupEditor": "none"
+}

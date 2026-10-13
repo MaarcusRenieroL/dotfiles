@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Zoro",
+  "version": "1.0",
+  "description": "maarcus.dev palette: navy base, emerald accent.",
+  "theme": {
+    "colors": {
+      "frame": [11, 18, 25],
+      "frame_inactive": [9, 14, 20],
+      "toolbar": [17, 26, 35],
+      "tab_text": [230, 234, 239],
+      "tab_background_text": [140, 153, 168],
+      "bookmark_text": [230, 234, 239],
+      "ntp_background": [11, 18, 25],
+      "ntp_text": [230, 234, 239],
+      "ntp_link": [52, 211, 153],
+      "button_background": [17, 26, 35],
+      "omnibox_background": [28, 40, 51],
+      "omnibox_text": [230, 234, 239]
+    },
+    "tints": { "buttons": [0.4, 0.5, 0.45] }
+  }
+}

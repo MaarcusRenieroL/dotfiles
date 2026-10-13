@@ -1,0 +1,11 @@
+{
+  "name": "zoro-theme",
+  "displayName": "Zoro",
+  "version": "0.0.1",
+  "publisher": "maarcus",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["Themes"],
+  "contributes": {
+    "themes": [{ "label": "Zoro", "uiTheme": "vs-dark", "path": "./themes/zoro-color-theme.json" }]
+  }
+}

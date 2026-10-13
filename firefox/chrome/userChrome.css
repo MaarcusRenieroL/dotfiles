@@ -1,0 +1,27 @@
+/* Zoro — maarcus.dev palette. Needs toolkit.legacyUserProfileCustomizations.stylesheets = true */
+:root {
+  --zoro-bg: #0b1219; --zoro-card: #111a23; --zoro-surface: #1c2833;
+  --zoro-border: #2a3744; --zoro-fg: #e6eaef; --zoro-muted: #8c99a8; --zoro-accent: #34d399;
+
+  --lwt-accent-color: var(--zoro-bg) !important;
+  --lwt-text-color: var(--zoro-fg) !important;
+  --toolbar-bgcolor: var(--zoro-bg) !important;
+  --toolbar-color: var(--zoro-fg) !important;
+  --toolbar-field-background-color: var(--zoro-card) !important;
+  --toolbar-field-color: var(--zoro-fg) !important;
+  --toolbar-field-focus-background-color: var(--zoro-surface) !important;
+  --toolbar-field-border-color: var(--zoro-border) !important;
+  --tab-selected-bgcolor: var(--zoro-surface) !important;
+  --tab-selected-textcolor: var(--zoro-fg) !important;
+  --tab-loading-fill: var(--zoro-accent) !important;
+  --urlbar-box-bgcolor: var(--zoro-card) !important;
+  --focus-outline-color: var(--zoro-accent) !important;
+  --arrowpanel-background: var(--zoro-card) !important;
+  --arrowpanel-color: var(--zoro-fg) !important;
+  --arrowpanel-border-color: var(--zoro-border) !important;
+  --sidebar-background-color: var(--zoro-bg) !important;
+  --sidebar-text-color: var(--zoro-fg) !important;
+}
+#navigator-toolbox { background: var(--zoro-bg) !important; border-bottom: 1px solid var(--zoro-border) !important; }
+.tabbrowser-tab[selected] .tab-background { border-top: 2px solid var(--zoro-accent) !important; }
+#urlbar[focused] > #urlbar-background { border-color: var(--zoro-accent) !important; }
