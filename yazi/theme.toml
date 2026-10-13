@@ -1,0 +1,53 @@
+# Zoro — maarcus.dev palette
+[mgr]
+cwd = { fg = "#34d399", bold = true }
+hovered = { fg = "#0b1219", bg = "#34d399" }
+preview_hovered = { bg = "#1c2833" }
+find_keyword = { fg = "#fbbf24", bold = true }
+find_position = { fg = "#a78bfa" }
+marker_selected = { fg = "#34d399", bg = "#34d399" }
+marker_copied = { fg = "#fbbf24", bg = "#fbbf24" }
+marker_cut = { fg = "#f87171", bg = "#f87171" }
+border_style = { fg = "#2a3744" }
+
+[tabs]
+active = { fg = "#0b1219", bg = "#34d399", bold = true }
+inactive = { fg = "#8c99a8", bg = "#1c2833" }
+
+[mode]
+normal_main = { fg = "#0b1219", bg = "#34d399", bold = true }
+normal_alt = { fg = "#34d399", bg = "#1c2833" }
+select_main = { fg = "#0b1219", bg = "#a78bfa", bold = true }
+select_alt = { fg = "#a78bfa", bg = "#1c2833" }
+unset_main = { fg = "#0b1219", bg = "#f87171", bold = true }
+unset_alt = { fg = "#f87171", bg = "#1c2833" }
+
+[status]
+overall = { bg = "#0b1219" }
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+perm_type = { fg = "#34d399" }
+perm_read = { fg = "#fbbf24" }
+perm_write = { fg = "#f87171" }
+perm_exec = { fg = "#34d399" }
+progress_label = { fg = "#e6eaef", bold = true }
+progress_normal = { fg = "#34d399", bg = "#1c2833" }
+progress_error = { fg = "#f87171", bg = "#1c2833" }
+
+[input]
+border = { fg = "#34d399" }
+selected = { reversed = true }
+
+[select]
+border = { fg = "#34d399" }
+active = { fg = "#34d399", bold = true }
+
+[filetype]
+rules = [
+  { mime = "image/*", fg = "#a78bfa" },
+  { mime = "{audio,video}/*", fg = "#fbbf24" },
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*}", fg = "#f87171" },
+  { name = "*", is = "orphan", fg = "#f87171" },
+  { name = "*", is = "exec", fg = "#34d399" },
+  { name = "*/", fg = "#60a5fa" },
+]

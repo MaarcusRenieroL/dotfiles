@@ -1,0 +1,6 @@
+[display]
+theme = "Dark"
+cut_to_terminal = true
+show_self = false
+[style]
+color_mode = "Auto"

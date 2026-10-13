@@ -16,6 +16,12 @@ export VISUAL="nvim"
 export PAGER="less -FRX"
 
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
+export LG_CONFIG_FILE="$XDG_CONFIG_HOME/lazygit/config.yml,$XDG_CONFIG_HOME/lazygit/theme.yml"
+export GH_DASH_CONFIG="$XDG_CONFIG_HOME/gh-dash/config.yml"
+export POSTING_CONFIG_FILE="$XDG_CONFIG_HOME/posting/config.yaml"
+export POSTING_THEME_DIRECTORY="$XDG_CONFIG_HOME/posting/themes"
+export YAZI_CONFIG_HOME="$XDG_CONFIG_HOME/yazi"
+export BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config"
 export ZSH="$HOME/.oh-my-zsh"
 
 # --- fzf ---------------------------------------------------------------------
@@ -44,3 +50,4 @@ path_prepend "/opt/homebrew/opt/node@24/bin"
 
 # --- Machine-local overrides (never committed) -------------------------------
 [ -f "$ZSH_CONFIG/local.zsh" ] && source "$ZSH_CONFIG/local.zsh"
+. "$HOME/.cargo/env"

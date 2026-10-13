@@ -88,3 +88,24 @@ alias projects="cd $HOME/Desktop/projects"
 if [ -d "$HOME/Desktop/projects/raycast-destroyer" ]; then
   alias rd="cd $HOME/Desktop/projects/raycast-destroyer"
 fi
+
+# --- Modern CLI replacements & TUIs -------------------------------------------
+command -v duf  >/dev/null 2>&1 && alias df='duf'
+command -v dust >/dev/null 2>&1 && alias du='dust'
+command -v procs >/dev/null 2>&1 && alias psa='procs'
+command -v btop >/dev/null 2>&1 && alias top='btop'
+alias lzd='lazydocker'
+alias ghd='gh dash'
+alias api='posting'
+alias j='just'
+
+# y: yazi that cd's into the directory you quit in
+y() {
+  local tmp cwd
+  tmp="$(mktemp -t yazi-cwd.XXXXXX)"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}

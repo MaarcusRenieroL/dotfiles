@@ -1,0 +1,12 @@
+style = "compact"
+inline_height = 20
+search_mode = "fuzzy"
+filter_mode = "global"
+filter_mode_shell_up_key_binding = "directory"
+show_preview = true
+enter_accept = false
+update_check = false
+sync_frequency = "0"   # local only; run `atuin register` and drop this to sync
+
+[theme]
+name = "zoro"

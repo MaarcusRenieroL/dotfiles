@@ -1,4 +1,5 @@
 add_newline = true
+palette = "zoro"
 command_timeout = 1200
 
 format = """
@@ -12,20 +13,20 @@ $character
 
 [os]
 disabled = false
-style = "bold cyan"
+style = "bold muted"
 
 [os.symbols]
 Macos = " "
 
 [username]
 show_always = false
-style_user = "bold green"
-style_root = "bold red"
+style_user = "bold accent"
+style_root = "bold danger"
 format = "[$user]($style) "
 
 [hostname]
 ssh_only = true
-style = "bold yellow"
+style = "bold amber"
 format = "on [$hostname]($style) "
 
 # =========================
@@ -33,7 +34,7 @@ format = "on [$hostname]($style) "
 # =========================
 
 [directory]
-style = "bold blue"
+style = "bold accent"
 truncation_length = 4
 truncate_to_repo = true
 read_only = " 󰌾"
@@ -45,11 +46,11 @@ format = "[$path]($style)[$read_only]($read_only_style) "
 
 [git_branch]
 symbol = " "
-style = "bold purple"
+style = "bold violet"
 format = "on [$symbol$branch]($style) "
 
 [git_status]
-style = "bold red"
+style = "bold danger"
 format = "([$all_status$ahead_behind]($style) )"
 conflicted = "=${count} "
 ahead = "⇡${count} "
@@ -63,13 +64,13 @@ renamed = "»${count} "
 deleted = "✘${count} "
 
 [git_state]
-style = "bold yellow"
+style = "bold amber"
 format = "\\([$state( $progress_current/$progress_total)]($style)\\) "
 
 [git_metrics]
 disabled = false
-added_style = "bold green"
-deleted_style = "bold red"
+added_style = "bold accent"
+deleted_style = "bold danger"
 format = "([+$added]($added_style) [-$deleted]($deleted_style) )"
 
 # =========================
@@ -78,19 +79,19 @@ format = "([+$added]($added_style) [-$deleted]($deleted_style) )"
 
 [nodejs]
 symbol = " "
-style = "bold green"
+style = "bold accent"
 format = "via [$symbol$version]($style) "
 detect_files = ["package.json"]
 
 [java]
 symbol = " "
-style = "bold red"
+style = "bold danger"
 format = "via [$symbol$version]($style) "
 detect_files = ["pom.xml"]
 
 [package]
 symbol = "📦 "
-style = "bold orange"
+style = "bold amber"
 format = "is [$symbol$version]($style) "
 disabled = false
 
@@ -100,19 +101,19 @@ disabled = false
 
 [docker_context]
 symbol = " "
-style = "bold blue"
+style = "bold accent"
 format = "via [$symbol$context]($style) "
 only_with_files = true
 
 [aws]
 symbol = "☁️ "
-style = "bold yellow"
+style = "bold amber"
 format = "on [$symbol$profile( \\($region\\))]($style) "
 
 [kubernetes]
 disabled = false
 symbol = "☸ "
-style = "bold cyan"
+style = "bold muted"
 format = "on [$symbol$context( \\($namespace\\))]($style) "
 
 # =========================
@@ -121,12 +122,12 @@ format = "on [$symbol$context( \\($namespace\\))]($style) "
 
 [cmd_duration]
 min_time = 1000
-style = "bold yellow"
+style = "bold amber"
 format = "took [$duration]($style) "
 
 [jobs]
 symbol = "✦ "
-style = "bold blue"
+style = "bold accent"
 format = "[$symbol$number]($style) "
 
 [battery]
@@ -139,17 +140,28 @@ format = "[$symbol$percentage]($style) "
 
 [[battery.display]]
 threshold = 25
-style = "bold red"
+style = "bold danger"
 
 [[battery.display]]
 threshold = 50
-style = "bold yellow"
+style = "bold amber"
 
 # =========================
 # Prompt Character
 # =========================
 
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
-vimcmd_symbol = "[❮](bold blue)"
+success_symbol = "[❯](bold accent)"
+error_symbol = "[❯](bold danger)"
+vimcmd_symbol = "[❮](bold violet)"
+
+# =========================
+# Palette (maarcus.dev)
+# =========================
+
+[palettes.zoro]
+accent = "#34d399"
+muted = "#8c99a8"
+violet = "#a78bfa"
+amber = "#fbbf24"
+danger = "#f87171"

@@ -61,6 +61,7 @@ clone_plugin() {
 }
 clone_plugin https://github.com/zsh-users/zsh-autosuggestions     zsh-autosuggestions
 clone_plugin https://github.com/zsh-users/zsh-syntax-highlighting zsh-syntax-highlighting
+clone_plugin https://github.com/Aloxaf/fzf-tab                    fzf-tab
 
 # --- 4. tmux plugin manager --------------------------------------------------
 hr "tmux (tpm)"
