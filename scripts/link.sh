@@ -36,10 +36,12 @@ fi
 link_file "$DOTFILES/yabai/yabairc"     "$HOME/.config/yabai/yabairc"
 link_file "$DOTFILES/skhd/skhdrc"       "$HOME/.config/skhd/skhdrc"
 link_file "$DOTFILES/borders/bordersrc" "$HOME/.config/borders/bordersrc"
+link_file "$DOTFILES/sketchybar" "$HOME/.config/sketchybar"
 
 # Ghostty is a GUI app too — it can't see the shell's XDG_CONFIG_HOME, so link
 # its config into the real ~/.config (where it falls back to looking).
 link_file "$DOTFILES/ghostty/config" "$HOME/.config/ghostty/config"
+link_file "$DOTFILES/ghostty/themes" "$HOME/.config/ghostty/themes"
 
 # 3) Everything else (nvim, starship, lazygit, neofetch) is read in place
 #    from $DOTFILES via XDG_CONFIG_HOME, which ~/.zshenv exports. No links needed.

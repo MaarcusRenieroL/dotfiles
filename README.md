@@ -1,7 +1,7 @@
 # dotfiles
 
 macOS development environment — zsh, Neovim, tmux, WezTerm, and a yabai/skhd/borders
-tiling setup. Catppuccin Mocha throughout.
+tiling setup. Zoro theme throughout — the maarcus.dev palette (navy base, emerald accent).
 
 ## Quick start
 
@@ -59,9 +59,12 @@ dotfiles/
 ├── zsh/                  # .zshenv (env+PATH), .zshrc, aliases.zsh, functions.zsh
 ├── git/                  # .gitconfig, .gitignore_global, themes/ (delta)
 ├── nvim/                 # Neovim (lazy.nvim)
-├── tmux/  wezterm/       # terminal + multiplexer
+├── theme/                # palette.env + templates → regenerates every app's colours (`make theme`)
+├── tmux/  wezterm/       # terminal + multiplexer (tmux/layouts, tmux/scripts)
+├── icons/ vscode/ firefox/ chrome-theme/   # custom app icons + editor/browser themes (`make rice`)
+├── atuin/ yazi/ bat/ btop/ fastfetch/ mise/ procs/ direnv/ gh-dash/ posting/ jesseduffield/
 ├── yabai/ skhd/ borders/ # tiling WM + hotkeys + window borders
-└── starship/ lazygit/ neofetch/
+└── starship/ lazygit/
 ```
 
 ## Machine-local overrides

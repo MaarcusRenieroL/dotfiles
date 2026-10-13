@@ -3,7 +3,7 @@ BREWFILE := $(DOTFILES)/brew/Brewfile
 
 .DEFAULT_GOAL := help
 
-.PHONY: help install link brew brew-check macos doctor update dump clean
+.PHONY: help install link brew brew-check theme rice macos doctor update dump clean
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -20,6 +20,12 @@ brew: ## Install everything in the Brewfile
 
 brew-check: ## Report unmet Brewfile dependencies
 	@brew bundle check --file $(BREWFILE) --verbose || true
+
+theme: ## Regenerate all app colours from theme/palette.env
+	@bash $(DOTFILES)/theme/apply.sh
+
+rice: ## Apply theme: macOS appearance, app icons, VS Code, Firefox
+	@bash $(DOTFILES)/scripts/rice.sh
 
 macos: ## Apply macOS system defaults
 	@bash $(DOTFILES)/scripts/macos.sh

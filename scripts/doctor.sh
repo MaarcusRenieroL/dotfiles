@@ -53,18 +53,23 @@ hr "Shell environment"
   && pass "XDG_CONFIG_HOME=$DOTFILES" \
   || soft "XDG_CONFIG_HOME not set to $DOTFILES (open a new shell after install)"
 [ -d "$HOME/.oh-my-zsh" ] && pass "oh-my-zsh installed" || fail "oh-my-zsh missing"
-for p in zsh-autosuggestions zsh-syntax-highlighting; do
+for p in zsh-autosuggestions zsh-syntax-highlighting fzf-tab; do
   [ -d "$HOME/.oh-my-zsh/custom/plugins/$p" ] && pass "omz plugin $p" || fail "omz plugin $p missing"
 done
 
 hr "Git / delta"
-if git config --get-regexp '^delta\.catppuccin-mocha\.' >/dev/null 2>&1; then
-  pass "delta theme 'catppuccin-mocha' resolves"
+if git config --get-regexp '^delta\.zoro\.' >/dev/null 2>&1; then
+  pass "delta theme 'zoro' resolves"
 else
-  fail "delta theme 'catppuccin-mocha' not found (git include broken)"
+  fail "delta theme 'zoro' not found (git include broken)"
 fi
 
 hr "Fonts"
+if ls ~/Library/Fonts/GeistMonoNerdFont* >/dev/null 2>&1; then
+  pass "Geist Mono Nerd Font present"
+else
+  soft "Geist Mono Nerd Font not found (brew bundle installs font-geist-mono-nerd-font)"
+fi
 if ls ~/Library/Fonts/JetBrainsMono* >/dev/null 2>&1 \
    || system_profiler SPFontsDataType 2>/dev/null | grep -qi "JetBrains Mono"; then
   pass "JetBrains Mono present"

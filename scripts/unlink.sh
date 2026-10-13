@@ -18,6 +18,7 @@ symlinks=(
   "$HOME/.config/yabai/yabairc"
   "$HOME/.config/skhd/skhdrc"
   "$HOME/.config/borders/bordersrc"
+  "$HOME/.config/sketchybar"
 )
 
 for link in "${symlinks[@]}"; do
