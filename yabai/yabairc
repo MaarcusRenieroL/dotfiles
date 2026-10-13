@@ -39,6 +39,22 @@ yabai -m rule --add app="^VLC$" manage=off
 yabai -m rule --add app="^Spotify$" manage=off
 yabai -m rule --add app="^Notion Calendar$" manage=off
 
-yabai -m rule --add app="^WezTerm$" space=2
-yabai -m rule --add app="^Google Chrome$" space=1
-yabai -m rule --add app="^Discord$" space=4
+
+# Scratchpad terminal (skhd/scripts/scratchpad.sh): floating and centred
+yabai -m rule --add title="^scratchpad$" manage=off sticky=on grid=8:8:1:1:6:6
+
+# Keep sketchybar in sync: rebuild when spaces appear/disappear, refresh on window changes
+yabai -m signal --add event=space_created action="sketchybar --reload"
+yabai -m signal --add event=space_destroyed action="sketchybar --reload"
+yabai -m signal --add event=window_created action="sketchybar --trigger yabai_windows"
+yabai -m signal --add event=window_destroyed action="sketchybar --trigger yabai_windows"
+yabai -m signal --add event=window_moved action="sketchybar --trigger yabai_windows"
+yabai -m signal --add event=window_focused action="sketchybar --trigger yabai_windows"
+yabai -m signal --add event=window_title_changed action="sketchybar --trigger yabai_windows"
+
+# New windows land on the space that matches the sketchybar names (sketchybar/spaces.conf)
+yabai -m rule --add app="^(Google Chrome|Safari)$" space=1                                  # browsing
+yabai -m rule --add app="^(Claude|ChatGPT)$" space=2                                        # ai
+yabai -m rule --add app="^(Ghostty|WezTerm|Visual Studio Code|IntelliJ IDEA|WebStorm)$" space=3   # coding
+yabai -m rule --add app="^(Firefox|Docker Desktop|Docker|Insomnia|Postman)$" space=4        # devtools
+yabai -m rule --add app="^(Spotify|VLC)$" space=5                                           # media

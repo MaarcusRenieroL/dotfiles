@@ -50,3 +50,28 @@ ctrl + alt - 2 : yabai -m window --grid 1:2:1:0:1:1
 ctrl + alt - 3 : yabai -m window --grid 1:3:0:0:1:1
 ctrl + alt - 4 : yabai -m window --grid 1:3:1:0:1:1
 ctrl + alt - 5 : yabai -m window --grid 1:3:2:0:1:1
+
+# --- Layout presets ------------------------------------------------------------
+ctrl + alt - b : yabai -m space --layout bsp
+ctrl + alt - s : yabai -m space --layout stack
+ctrl + alt - 0 : yabai -m space --layout float
+alt - tab : yabai -m window --focus recent
+
+# --- Scratchpad: drop-down tmux terminal ----------------------------------------
+alt - 0x32 : ~/dotfiles/skhd/scripts/scratchpad.sh        # alt + `
+
+# --- Launch mode: alt + o, then a letter ---------------------------------------
+:: launch @ : skhd -k escape
+alt - o ; launch
+launch < escape ; default
+launch < t : open -a Ghostty; skhd -k escape
+launch < w : open -a WezTerm; skhd -k escape
+launch < c : open -a "Google Chrome"; skhd -k escape
+launch < f : open -a Firefox; skhd -k escape
+launch < v : open -a "Visual Studio Code"; skhd -k escape
+launch < d : open -a Discord; skhd -k escape
+launch < s : open -a Spotify; skhd -k escape
+launch < n : open -a Notion; skhd -k escape
+launch < m : open -a "Notion Calendar"; skhd -k escape
+launch < r : open -a Raycast; skhd -k escape
+launch < a : open -a Augur; skhd -k escape
