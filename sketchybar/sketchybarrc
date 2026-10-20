@@ -95,50 +95,60 @@ sketchybar --add item wifi.gw popup.wifi --set wifi.gw label.color=$MUTED icon.d
 sketchybar --add item network right \
            --set network update_freq=2 script="$PLUGIN_DIR/network.sh"
 
-# 6. Spotify (Compact bar widget + Sleek Horizontal Floating Island Player)
+# 6. Spotify (Compact bar widget + Apple-style Now Playing Card)
 sketchybar --add item spotify right \
            --set spotify icon=󰓇 icon.color=$ACCENT update_freq=3 drawing=off \
                  label.max_chars=18 \
-                 popup.horizontal=on popup.height=38 popup.align=center \
+                 popup.horizontal=off popup.height=26 popup.align=center \
                  popup.background.color=$CARD popup.background.border_width=1 \
-                 popup.background.border_color=$BORDER popup.background.corner_radius=10 \
+                 popup.background.border_color=$BORDER popup.background.corner_radius=16 \
                  script="$PLUGIN_DIR/spotify.sh update" \
                  click_script="$PLUGIN_DIR/spotify.sh popup" \
            --subscribe spotify mouse.exited.global
 
-# Album Cover Thumbnail
+# Album Artwork (Centered rounded squircle)
 sketchybar --add item spotify.cover popup.spotify \
            --set spotify.cover icon.drawing=off label.drawing=off \
                  background.drawing=on background.color=$TRANSPARENT \
-                 background.image.scale=0.06 background.image.corner_radius=6 \
-                 background.height=28 width=28 \
-                 padding_left=6 padding_right=6 \
+                 background.image.scale=0.25 background.image.corner_radius=12 \
+                 background.height=160 width=160 \
+                 padding_left=25 padding_right=25 \
                  click_script="open -a Spotify"
 
-# Track Title + Artist
+# Track Title (Centered bold)
 sketchybar --add item spotify.title popup.spotify \
            --set spotify.title icon.drawing=off \
-                 label.font="$FONT:Bold:12.0" label.color=$FG label.max_chars=32 \
-                 padding_left=2 padding_right=10 \
+                 label.font="$FONT:Bold:13.0" label.color=$FG label.max_chars=26 \
+                 label.align=center width=210 \
                  click_script="open -a Spotify"
 
-# Controls: Previous, Play/Pause, Next (Horizontal row)
+# Artist Name (Centered muted)
+sketchybar --add item spotify.artist popup.spotify \
+           --set spotify.artist icon.drawing=off \
+                 label.font="$FONT:Medium:11.0" label.color=$MUTED label.max_chars=28 \
+                 label.align=center width=210 \
+                 click_script="open -a Spotify"
+
+# Progress Bar (Centered timestamps + track bar)
+sketchybar --add item spotify.progress popup.spotify \
+           --set spotify.progress icon.drawing=off \
+                 label.font="$FONT:Regular:10.0" label.color=$MUTED \
+                 label.align=center width=210
+
+# Playback Controls: Previous, Play/Pause, Next (Horizontal row on one line)
 sketchybar --add item spotify.prev popup.spotify \
-           --set spotify.prev icon=󰒮 icon.color=$FG icon.font="$FONT:Bold:14.0" \
-                 label.drawing=off \
-                 padding_left=6 padding_right=6 \
+           --set spotify.prev icon=󰒮 icon.color=$FG icon.font="$FONT:Bold:18.0" \
+                 label.drawing=off width=50 padding_left=25 y_offset=0 \
                  click_script="$PLUGIN_DIR/spotify.sh prev"
 
 sketchybar --add item spotify.play popup.spotify \
-           --set spotify.play icon=󰏤 icon.color=$ACCENT icon.font="$FONT:Bold:16.0" \
-                 label.drawing=off \
-                 padding_left=6 padding_right=6 \
+           --set spotify.play icon=󰏤 icon.color=$ACCENT icon.font="$FONT:Bold:22.0" \
+                 label.drawing=off width=50 padding_left=80 y_offset=-26 \
                  click_script="$PLUGIN_DIR/spotify.sh playpause"
 
 sketchybar --add item spotify.next popup.spotify \
-           --set spotify.next icon=󰒭 icon.color=$FG icon.font="$FONT:Bold:14.0" \
-                 label.drawing=off \
-                 padding_left=6 padding_right=8 \
+           --set spotify.next icon=󰒭 icon.color=$FG icon.font="$FONT:Bold:18.0" \
+                 label.drawing=off width=50 padding_left=135 y_offset=-26 \
                  click_script="$PLUGIN_DIR/spotify.sh next"
 
 # 7. Memory

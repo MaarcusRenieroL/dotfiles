@@ -63,6 +63,38 @@ if [ -n "$tart" ]; then
   fi
 fi
 
+# Progress calculation (mm:ss)
+pos_sec=${tpos%.*}
+dur_sec=${tdur%.*}
+pos_sec=${pos_sec:-0}
+dur_sec=${dur_sec:-1}
+
+pos_min=$((pos_sec / 60))
+pos_rem=$((pos_sec % 60))
+printf -v pos_str "%02d:%02d" $pos_min $pos_rem
+
+dur_min=$((dur_sec / 60))
+dur_rem=$((dur_sec % 60))
+printf -v dur_str "%02d:%02d" $dur_min $dur_rem
+
+if [ "$dur_sec" -gt 0 ]; then
+  pct=$((pos_sec * 100 / dur_sec))
+else
+  pct=0
+fi
+
+filled=$((pct * 12 / 100))
+[ "$filled" -gt 12 ] && filled=12
+[ "$filled" -lt 0 ] && filled=0
+empty=$((12 - filled))
+
+bar=""
+for ((i=0; i<filled; i++)); do bar+="━"; done
+bar+="●"
+for ((i=0; i<empty; i++)); do bar+="─"; done
+
+progress_str="$pos_str  $bar  $dur_str"
+
 # Player state icons
 if [ "$pstate" = "playing" ]; then
   bar_icon="󰓇"
@@ -75,9 +107,19 @@ else
 fi
 
 bar_label="${tartist:-Unknown} – ${tname:-Unknown}"
-popup_title="${tname:-No Track} • ${tartist:-Unknown}"
 
-# Update bar item and popup horizontal player
+# Truncate title for card if very long
+card_title="${tname:-No Title}"
+if [ ${#card_title} -gt 24 ]; then
+  card_title="${card_title:0:22}…"
+fi
+
+card_artist="${tartist:-Unknown Artist}"
+if [ ${#card_artist} -gt 28 ]; then
+  card_artist="${card_artist:0:26}…"
+fi
+
+# Update bar item and vertical Now Playing card
 sketchybar --set spotify drawing=on \
                          icon="$bar_icon" \
                          icon.color="$bar_icon_color" \
@@ -85,5 +127,7 @@ sketchybar --set spotify drawing=on \
            --set spotify.cover background.image="$COVER_FILE" \
                                background.image.drawing=on \
                                background.drawing=on \
-           --set spotify.title label="$popup_title" \
+           --set spotify.title label="$card_title" \
+           --set spotify.artist label="$card_artist" \
+           --set spotify.progress label="$progress_str" \
            --set spotify.play icon="$play_icon"
