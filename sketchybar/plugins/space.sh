@@ -9,8 +9,8 @@ if [ "$focused" = "true" ]; then
   sketchybar --set "$NAME" icon.color=$BG \
                            background.color=$ACCENT \
                            background.drawing=on \
-                           background.corner_radius=6 \
-                           background.height=20
+                           background.corner_radius=5 \
+                           background.height=18
 elif [ "${windows:-0}" -gt 0 ]; then
   sketchybar --set "$NAME" icon.color=$FG \
                            background.drawing=off

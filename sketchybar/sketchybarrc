@@ -1,39 +1,39 @@
 #!/bin/bash
-# Sketchybar — Zoro Santoryu Edition: Floating Bento Islands, Katana Steel & Emerald Accents
+# Sketchybar — Zoro Santoryu Edition: Flush Notch Bar with Katana Bento Pills
 
 source "$CONFIG_DIR/colors.sh"
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
-# 1. Floating Bar Geometry
-sketchybar --bar position=top height=38 color=$BAR_BG \
+# 1. Bar Configuration — Flush with notch height (32pt), dark katana navy background
+sketchybar --bar position=top height=32 color=$BAR_BG \
                  border_width=1 border_color=$BAR_BORDER \
-                 corner_radius=12 y_offset=5 margin=12 \
+                 corner_radius=0 y_offset=0 margin=0 \
                  padding_left=8 padding_right=8 \
-                 shadow=on blur_radius=25
+                 shadow=off blur_radius=20
 
 # 2. Defaults
 sketchybar --default updates=when_shown \
-                     icon.font="$FONT:Regular:13.0" icon.color=$MUTED \
-                     label.font="$FONT:Medium:12.0" label.color=$FG \
-                     icon.padding_left=4 icon.padding_right=4 \
-                     label.padding_left=0 label.padding_right=4 \
-                     padding_left=2 padding_right=2 \
+                     icon.font="$FONT:Regular:12.0" icon.color=$MUTED \
+                     label.font="$FONT:Medium:11.5" label.color=$FG \
+                     icon.padding_left=3 icon.padding_right=3 \
+                     label.padding_left=0 label.padding_right=3 \
+                     padding_left=0 padding_right=0 \
                      background.drawing=off
 
 sketchybar --add event yabai_windows
 
-# --- LEFT: [ 󰓦 workspace name ] [ 1 2 3 4 5 ] [ 󰘔 app name ] -----------------
+# --- LEFT: [ 󰓦 space ]   [ 1 2 3 4 5 ]   [ 󰘔 app ] ---------------------------
 
-# 1. Workspace Name Pill (Crossed swords Santoryu icon + workspace name)
+# 1. Workspace Name Pill
 sketchybar --add item space_name left \
-           --set space_name icon=󰓦 icon.color=$ACCENT icon.font="$FONT:Bold:14.0" \
-                 icon.padding_left=8 icon.padding_right=6 \
-                 label.font="$FONT:Bold:12.0" label.color=$FG \
-                 label.padding_right=10 \
+           --set space_name icon=󰓦 icon.color=$ACCENT icon.font="$FONT:Bold:13.0" \
+                 icon.padding_left=7 icon.padding_right=5 \
+                 label.font="$FONT:Bold:11.5" label.color=$FG \
+                 label.padding_right=8 \
                  background.drawing=on background.color=$CARD \
                  background.border_width=1 background.border_color=$CARD_BORDER \
-                 background.corner_radius=8 background.height=26 \
-                 padding_left=2 padding_right=4 \
+                 background.corner_radius=6 background.height=24 \
+                 padding_left=2 padding_right=8 \
                  script="$PLUGIN_DIR/space_name.sh" \
            --subscribe space_name space_change front_app_switched yabai_windows
 
@@ -43,10 +43,10 @@ space_items=()
 for i in $(seq 1 "${SPACE_COUNT:-5}"); do
   space_items+=("space.$i")
   sketchybar --add item space.$i left \
-             --set space.$i icon=$i icon.font="$FONT:Bold:12.0" icon.color=$MUTED \
-                   icon.padding_left=7 icon.padding_right=7 \
+             --set space.$i icon=$i icon.font="$FONT:Bold:11.5" icon.color=$MUTED \
+                   icon.padding_left=6 icon.padding_right=6 \
                    label.drawing=off \
-                   background.drawing=off background.corner_radius=6 background.height=20 \
+                   background.drawing=off background.corner_radius=5 background.height=18 \
                    padding_left=1 padding_right=1 \
                    click_script="yabai -m space --focus $i" \
                    script="$PLUGIN_DIR/space.sh $i" \
@@ -56,33 +56,33 @@ done
 sketchybar --add bracket spaces "${space_items[@]}" \
            --set spaces background.drawing=on background.color=$CARD \
                         background.border_width=1 background.border_color=$CARD_BORDER \
-                        background.corner_radius=8 background.height=26 \
-                        padding_left=2 padding_right=4
+                        background.corner_radius=6 background.height=24 \
+                        padding_left=0 padding_right=8
 
 # 3. Active Application Pill
 sketchybar --add item front_app left \
-           --set front_app icon=󰘔 icon.color=$ENMA icon.font="$FONT:Bold:13.0" \
-                 icon.padding_left=8 icon.padding_right=5 \
-                 label.font="$FONT:Bold:12.0" label.color=$FG label.max_chars=18 \
-                 label.padding_right=10 \
+           --set front_app icon=󰘔 icon.color=$ENMA icon.font="$FONT:Bold:12.0" \
+                 icon.padding_left=7 icon.padding_right=4 \
+                 label.font="$FONT:Bold:11.5" label.color=$FG label.max_chars=16 \
+                 label.padding_right=8 \
                  background.drawing=on background.color=$CARD \
                  background.border_width=1 background.border_color=$CARD_BORDER \
-                 background.corner_radius=8 background.height=26 \
-                 padding_left=2 padding_right=4 \
+                 background.corner_radius=6 background.height=24 \
+                 padding_left=0 padding_right=4 \
                  script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched yabai_windows
 
 
-# --- RIGHT: [ 󰓇 spotify ] [ 󰛳 net 󰍛 mem 󰻠 cpu ] [ 󰤨 wifi 󰕾 vol 󰁹 bat 󰥔 time ] ---
+# --- RIGHT: [ 󰓇 spotify ]   [ 󰛳 net 󰍛 mem 󰻠 cpu ]   [ 󰤨 wifi 󰕾 vol 󰁹 bat 󰥔 time ] ---
 
-# Group 1: System Status (Clock, Battery, Volume, WiFi)
+# Group 1: System Status Pill (Clock, Battery, Volume, WiFi)
 sketchybar --add item clock right \
            --set clock icon=󰥔 icon.color=$ACCENT_BRIGHT update_freq=10 \
-                 icon.padding_left=6 icon.padding_right=4 \
-                 label.padding_right=8 \
+                 icon.padding_left=4 icon.padding_right=3 \
+                 label.padding_right=7 \
                  popup.align=right popup.height=24 popup.background.color=$CARD \
                  popup.background.border_width=1 popup.background.border_color=$CARD_BORDER \
-                 popup.background.corner_radius=8 \
+                 popup.background.corner_radius=6 \
                  script="$PLUGIN_DIR/clock.sh" click_script="$PLUGIN_DIR/popup.sh clock" \
            --subscribe clock mouse.exited.global
 sketchybar --add item clock.date popup.clock --set clock.date label.color=$FG icon.drawing=off
@@ -91,10 +91,10 @@ sketchybar --add item clock.up popup.clock --set clock.up label.color=$MUTED ico
 
 sketchybar --add item battery right \
            --set battery update_freq=60 script="$PLUGIN_DIR/battery.sh" \
-                 icon.padding_left=6 icon.padding_right=3 \
-                 label.padding_right=6 \
+                 icon.padding_left=4 icon.padding_right=2 \
+                 label.padding_right=5 \
                  popup.align=right popup.background.color=$CARD popup.background.border_width=1 \
-                 popup.background.border_color=$CARD_BORDER popup.background.corner_radius=8 \
+                 popup.background.border_color=$CARD_BORDER popup.background.corner_radius=6 \
                  click_script="$PLUGIN_DIR/popup.sh battery" \
            --subscribe battery power_source_change system_woke mouse.exited.global
 sketchybar --add item battery.time popup.battery --set battery.time label.color=$FG icon.drawing=off
@@ -102,15 +102,15 @@ sketchybar --add item battery.cycles popup.battery --set battery.cycles label.co
 
 sketchybar --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
-                 icon.padding_left=6 icon.padding_right=3 \
-                 label.padding_right=6 \
+                 icon.padding_left=4 icon.padding_right=2 \
+                 label.padding_right=5 \
            --subscribe volume volume_change
 
 sketchybar --add item wifi right \
            --set wifi update_freq=15 script="$PLUGIN_DIR/wifi.sh" \
-                 icon.padding_left=8 icon.padding_right=4 \
+                 icon.padding_left=6 icon.padding_right=3 \
                  popup.align=right popup.background.color=$CARD popup.background.border_width=1 \
-                 popup.background.border_color=$CARD_BORDER popup.background.corner_radius=8 \
+                 popup.background.border_color=$CARD_BORDER popup.background.corner_radius=6 \
                  click_script="$PLUGIN_DIR/popup.sh wifi" \
            --subscribe wifi system_woke mouse.exited.global
 sketchybar --add item wifi.ip popup.wifi --set wifi.ip label.color=$FG icon.drawing=off
@@ -119,43 +119,44 @@ sketchybar --add item wifi.gw popup.wifi --set wifi.gw label.color=$MUTED icon.d
 sketchybar --add bracket system wifi volume battery clock \
            --set system background.drawing=on background.color=$CARD \
                         background.border_width=1 background.border_color=$CARD_BORDER \
-                        background.corner_radius=8 background.height=26 \
-                        padding_left=2 padding_right=2
+                        background.corner_radius=6 background.height=24
 
-# Group 2: Vitals (Network, Memory, CPU)
+# Group 2: Vitals Pill (Network, Memory, CPU)
+# padding_right=12 creates a visible 12px gap between system and vitals pills
 sketchybar --add item cpu right \
            --set cpu icon=󰻠 icon.color=$GOLD update_freq=3 \
-                 icon.padding_left=6 icon.padding_right=3 \
-                 label.padding_right=8 \
+                 icon.padding_left=4 icon.padding_right=2 \
+                 label.padding_right=6 \
+                 padding_right=12 \
                  script="$PLUGIN_DIR/cpu.sh"
 
 sketchybar --add item memory right \
            --set memory icon=󰍛 icon.color=$ENMA update_freq=5 \
-                 icon.padding_left=6 icon.padding_right=3 \
-                 label.padding_right=6 \
+                 icon.padding_left=4 icon.padding_right=2 \
+                 label.padding_right=5 \
                  script="$PLUGIN_DIR/memory.sh"
 
 sketchybar --add item network right \
            --set network update_freq=2 icon=󰛳 icon.color=$ACCENT \
-                 icon.padding_left=8 icon.padding_right=4 \
-                 label.padding_right=6 \
+                 icon.padding_left=6 icon.padding_right=3 \
+                 label.padding_right=5 \
                  script="$PLUGIN_DIR/network.sh"
 
 sketchybar --add bracket vitals network memory cpu \
            --set vitals background.drawing=on background.color=$CARD \
                         background.border_width=1 background.border_color=$CARD_BORDER \
-                        background.corner_radius=8 background.height=26 \
-                        padding_left=4 padding_right=4
+                        background.corner_radius=6 background.height=24
 
 # Group 3: Spotify Pill
+# padding_right=12 creates a visible 12px gap between vitals and spotify pills
 sketchybar --add item spotify right \
            --set spotify icon=󰓇 icon.color=$ACCENT update_freq=3 drawing=off \
-                 icon.padding_left=8 icon.padding_right=5 \
-                 label.max_chars=20 label.padding_right=10 \
+                 icon.padding_left=7 icon.padding_right=4 \
+                 label.max_chars=14 label.padding_right=8 \
                  background.drawing=on background.color=$CARD \
                  background.border_width=1 background.border_color=$CARD_BORDER \
-                 background.corner_radius=8 background.height=26 \
-                 padding_left=4 padding_right=4 \
+                 background.corner_radius=6 background.height=24 \
+                 padding_right=12 \
                  script="$PLUGIN_DIR/spotify.sh" \
                  click_script="$PLUGIN_DIR/spotify-click.sh"
 
