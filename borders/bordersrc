@@ -4,10 +4,10 @@ source "${DOTFILES:-$HOME/dotfiles}/borders/colors.sh"
 
 options=(
   style=round
-  width=2.0
+  width=3.0
   hidpi=on
-  active_color=$BORDER_ACTIVE
-  inactive_color=$BORDER_INACTIVE
+  active_color=${BORDER_ACTIVE:-0xff34d399}
+  inactive_color=${BORDER_INACTIVE:-0x30ffffff}
 )
 
 borders "${options[@]}"
