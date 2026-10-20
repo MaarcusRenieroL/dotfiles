@@ -39,4 +39,4 @@ format_speed() {
 down_str=$(format_speed "$down_rate")
 up_str=$(format_speed "$up_rate")
 
-sketchybar --set "$NAME" icon=󰛳 icon.color=$ACCENT label="↓ $down_str  ↑ $up_str"
+sketchybar --set "$NAME" icon=󰛳 icon.color=$ACCENT label="↓$down_str ↑$up_str"
