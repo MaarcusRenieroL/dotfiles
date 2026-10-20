@@ -14,11 +14,13 @@ symlinks=(
   "$HOME/.tmux.conf"
   "$HOME/.gitconfig"
   "$HOME/.gitignore_global"
-  "$HOME/.wezterm.lua"
   "$HOME/.config/yabai/yabairc"
   "$HOME/.config/skhd/skhdrc"
   "$HOME/.config/borders/bordersrc"
   "$HOME/.config/sketchybar"
+  "$HOME/.config/ghostty/config"
+  "$HOME/.config/ghostty/themes"
+  "$HOME/.config/ghostty/Ghostty.icns"
 )
 
 for link in "${symlinks[@]}"; do

@@ -24,7 +24,7 @@ brew-check: ## Report unmet Brewfile dependencies
 theme: ## Regenerate all app colours from theme/palette.env
 	@bash $(DOTFILES)/theme/apply.sh
 
-rice: ## Apply theme: macOS appearance, app icons, VS Code, Firefox
+rice: ## Apply theme: macOS appearance, app icons, VS Code
 	@bash $(DOTFILES)/scripts/rice.sh
 
 macos: ## Apply macOS system defaults

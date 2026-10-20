@@ -31,7 +31,7 @@ hr "Tooling"
 for c in git nvim tmux starship zoxide fzf eza fd bat delta lazygit stow gh node pnpm; do
   check_cmd "$c"
 done
-for c in yabai skhd borders; do
+for c in yabai skhd borders sketchybar; do
   have "$c" && pass "$c installed" || soft "$c missing (macOS WM, optional)"
 done
 
@@ -41,12 +41,14 @@ check_link "$DOTFILES/zsh/.zshrc"           "$HOME/.zshrc"
 check_link "$DOTFILES/tmux/.tmux.conf"      "$HOME/.tmux.conf"
 check_link "$DOTFILES/git/.gitconfig"       "$HOME/.gitconfig"
 check_link "$DOTFILES/git/.gitignore_global" "$HOME/.gitignore_global"
-check_link "$DOTFILES/wezterm/.wezterm.lua" "$HOME/.wezterm.lua"
 
 hr "Service configs (~/.config)"
-check_link "$DOTFILES/yabai/yabairc"     "$HOME/.config/yabai/yabairc"
-check_link "$DOTFILES/skhd/skhdrc"       "$HOME/.config/skhd/skhdrc"
-check_link "$DOTFILES/borders/bordersrc" "$HOME/.config/borders/bordersrc"
+check_link "$DOTFILES/yabai/yabairc"        "$HOME/.config/yabai/yabairc"
+check_link "$DOTFILES/skhd/skhdrc"          "$HOME/.config/skhd/skhdrc"
+check_link "$DOTFILES/borders/bordersrc"    "$HOME/.config/borders/bordersrc"
+check_link "$DOTFILES/sketchybar"           "$HOME/.config/sketchybar"
+check_link "$DOTFILES/ghostty/config"       "$HOME/.config/ghostty/config"
+check_link "$DOTFILES/ghostty/themes"       "$HOME/.config/ghostty/themes"
 
 hr "Shell environment"
 [ "${XDG_CONFIG_HOME:-}" = "$DOTFILES" ] \
@@ -69,12 +71,6 @@ if ls ~/Library/Fonts/GeistMonoNerdFont* >/dev/null 2>&1; then
   pass "Geist Mono Nerd Font present"
 else
   soft "Geist Mono Nerd Font not found (brew bundle installs font-geist-mono-nerd-font)"
-fi
-if ls ~/Library/Fonts/JetBrainsMono* >/dev/null 2>&1 \
-   || system_profiler SPFontsDataType 2>/dev/null | grep -qi "JetBrains Mono"; then
-  pass "JetBrains Mono present"
-else
-  soft "JetBrains Mono not found (brew bundle installs the cask)"
 fi
 
 hr "Summary"

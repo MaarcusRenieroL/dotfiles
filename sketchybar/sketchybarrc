@@ -16,17 +16,26 @@ sketchybar --default updates=when_shown \
                      padding_left=2 padding_right=2 \
                      background.drawing=off
 
-# --- left: workspaces (only the spaces that exist; names from spaces.conf) ---
-# yabai signals (yabairc) reload the bar when spaces are created/destroyed and
-# fire `yabai_windows` when windows open/close/move/focus.
 sketchybar --add event yabai_windows
 
+# --- LEFT: [ name of window ] [1] [2] [3] ... [ name of the app ] -------------
+
+# 1. Name of window that was selected
+sketchybar --add item window_title left \
+           --set window_title icon=󰖯 icon.color=$ACCENT \
+                 icon.padding_left=4 icon.padding_right=6 \
+                 label.font="$FONT:Medium:12.0" label.color=$FG label.max_chars=28 \
+                 label.padding_right=12 \
+                 script="$PLUGIN_DIR/window_title.sh" \
+           --subscribe window_title front_app_switched yabai_windows title_change
+
+# 2. Spaces: numbers without names
 SPACE_COUNT=$(yabai -m query --spaces 2>/dev/null | jq length 2>/dev/null)
 for i in $(seq 1 "${SPACE_COUNT:-1}"); do
   sketchybar --add item space.$i left \
              --set space.$i icon=$i icon.font="$FONT:Bold:12.0" icon.color=$MUTED \
-                   icon.padding_left=8 icon.padding_right=4 \
-                   label.font="$FONT:Medium:12.0" label.padding_right=8 label.max_chars=30 \
+                   icon.padding_left=7 icon.padding_right=7 \
+                   label.drawing=off \
                    background.drawing=on background.color=$TRANSPARENT \
                    background.corner_radius=6 background.height=22 \
                    click_script="yabai -m space --focus $i" \
@@ -34,21 +43,18 @@ for i in $(seq 1 "${SPACE_COUNT:-1}"); do
              --subscribe space.$i space_change front_app_switched yabai_windows
 done
 
-# --- left: yabai layout mode (click to cycle bsp → stack → float) --------------
-sketchybar --add item layout left \
-           --set layout icon.color=$ACCENT label.color=$MUTED \
-                 click_script="$PLUGIN_DIR/layout.sh cycle" \
-                 script="$PLUGIN_DIR/layout.sh" \
-           --subscribe layout space_change front_app_switched
+# 3. Name of open application
+sketchybar --add item front_app left \
+           --set front_app icon=󰘔 icon.color=$ACCENT \
+                 icon.padding_left=12 icon.padding_right=6 \
+                 label.font="$FONT:Bold:12.0" label.color=$FG label.max_chars=20 \
+                 script="$PLUGIN_DIR/front_app.sh" \
+           --subscribe front_app front_app_switched yabai_windows
 
-# --- left, after the layout: focused window title (kept short — the notch hides the centre) ----------------------------------------------------
-sketchybar --add item window_title left \
-           --set window_title icon.drawing=off label.color=$MUTED label.max_chars=22 icon.drawing=off padding_left=10 \
-                 script="$PLUGIN_DIR/window_title.sh" \
-           --subscribe window_title front_app_switched yabai_windows
 
-# --- right (added right-to-left) --------------------------------------------
-# Popups open on click and close when the mouse leaves the item.
+# --- RIGHT (added right-to-left) -----------------------------------------------
+
+# 1. Clock
 sketchybar --add item clock right \
            --set clock icon=󰥔 icon.color=$ACCENT update_freq=10 \
                  popup.align=right popup.height=24 popup.background.color=$CARD \
@@ -60,6 +66,7 @@ sketchybar --add item clock.date popup.clock --set clock.date label.color=$FG ic
 sketchybar --add item clock.week popup.clock --set clock.week label.color=$MUTED icon.drawing=off
 sketchybar --add item clock.up popup.clock --set clock.up label.color=$MUTED icon.drawing=off
 
+# 2. Battery
 sketchybar --add item battery right \
            --set battery update_freq=60 script="$PLUGIN_DIR/battery.sh" \
                  popup.align=right popup.background.color=$CARD popup.background.border_width=1 \
@@ -69,10 +76,12 @@ sketchybar --add item battery right \
 sketchybar --add item battery.time popup.battery --set battery.time label.color=$FG icon.drawing=off
 sketchybar --add item battery.cycles popup.battery --set battery.cycles label.color=$MUTED icon.drawing=off
 
+# 3. Volume
 sketchybar --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
            --subscribe volume volume_change
 
+# 4. WiFi
 sketchybar --add item wifi right \
            --set wifi update_freq=15 script="$PLUGIN_DIR/wifi.sh" \
                  popup.align=right popup.background.color=$CARD popup.background.border_width=1 \
@@ -82,14 +91,42 @@ sketchybar --add item wifi right \
 sketchybar --add item wifi.ip popup.wifi --set wifi.ip label.color=$FG icon.drawing=off
 sketchybar --add item wifi.gw popup.wifi --set wifi.gw label.color=$MUTED icon.drawing=off
 
-sketchybar --add item spotify right \
-           --set spotify icon=♪ icon.color=$ACCENT update_freq=5 drawing=off \
-                 label.max_chars=34 script="$PLUGIN_DIR/spotify.sh" \
-                 click_script="osascript -e 'tell application \"Spotify\" to playpause'"
+# 5. Network Speed
+sketchybar --add item network right \
+           --set network update_freq=2 script="$PLUGIN_DIR/network.sh"
 
+# 6. Spotify (Interactive popover player)
+sketchybar --add item spotify right \
+           --set spotify icon=󰓇 icon.color=$ACCENT update_freq=3 drawing=off \
+                 label.max_chars=28 \
+                 popup.align=center popup.height=26 \
+                 popup.background.color=$CARD popup.background.border_width=1 \
+                 popup.background.border_color=$BORDER popup.background.corner_radius=8 \
+                 script="$PLUGIN_DIR/spotify.sh update" \
+                 click_script="$PLUGIN_DIR/spotify.sh popup" \
+           --subscribe spotify mouse.exited.global
+
+sketchybar --add item spotify.title popup.spotify \
+           --set spotify.title icon=󰝚 icon.color=$ACCENT label.font="$FONT:Bold:12.0" label.color=$FG
+sketchybar --add item spotify.artist popup.spotify \
+           --set spotify.artist icon=󰠃 icon.color=$MUTED label.font="$FONT:Medium:11.0" label.color=$MUTED
+sketchybar --add item spotify.album popup.spotify \
+           --set spotify.album icon=󰀥 icon.color=$MUTED label.font="$FONT:Regular:11.0" label.color=$MUTED
+sketchybar --add item spotify.prev popup.spotify \
+           --set spotify.prev icon=󰒮 icon.color=$ACCENT label="Previous" label.color=$FG \
+                 click_script="$PLUGIN_DIR/spotify.sh prev"
+sketchybar --add item spotify.play popup.spotify \
+           --set spotify.play icon=󰏤 icon.color=$ACCENT label="Play / Pause" label.color=$FG \
+                 click_script="$PLUGIN_DIR/spotify.sh playpause"
+sketchybar --add item spotify.next popup.spotify \
+           --set spotify.next icon=󰒭 icon.color=$ACCENT label="Next" label.color=$FG \
+                 click_script="$PLUGIN_DIR/spotify.sh next"
+
+# 7. Memory
 sketchybar --add item memory right \
            --set memory icon=󰍛 update_freq=5 script="$PLUGIN_DIR/memory.sh"
 
+# 8. CPU
 sketchybar --add item cpu right \
            --set cpu icon=󰻠 update_freq=3 script="$PLUGIN_DIR/cpu.sh"
 

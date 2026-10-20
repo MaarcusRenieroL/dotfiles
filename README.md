@@ -40,9 +40,9 @@ environment, so they can't see `XDG_CONFIG_HOME`. This setup uses three rules:
 
 | What | How | Why |
 |------|-----|-----|
-| `.zshenv`, `.zshrc`, `.tmux.conf`, `.gitconfig`, `.gitignore_global`, `.wezterm.lua` | **GNU stow** → `$HOME` | These tools only read from `$HOME` |
-| nvim, starship, lazygit, neofetch | read **in place** from `~/dotfiles` via `XDG_CONFIG_HOME` | Set once in `.zshenv`; no links to maintain |
-| yabai, skhd, borders | symlinked into `~/.config/<app>` | launchd services can't see `XDG_CONFIG_HOME` |
+| `.zshenv`, `.zshrc`, `.tmux.conf`, `.gitconfig`, `.gitignore_global` | **GNU stow** → `$HOME` | These tools only read from `$HOME` |
+| nvim, starship, lazygit, bat | read **in place** from `~/dotfiles` via `XDG_CONFIG_HOME` | Set once in `.zshenv`; no links to maintain |
+| yabai, skhd, borders, sketchybar, ghostty | symlinked into `~/.config/<app>` | GUI/launchd services can't see shell `XDG_CONFIG_HOME` |
 
 `XDG_CONFIG_HOME=$HOME/dotfiles` is exported from [`zsh/.zshenv`](zsh/.zshenv), which
 every shell sources. Each stow package has a `.stow-local-ignore` so helper files
@@ -59,12 +59,11 @@ dotfiles/
 ├── zsh/                  # .zshenv (env+PATH), .zshrc, aliases.zsh, functions.zsh
 ├── git/                  # .gitconfig, .gitignore_global, themes/ (delta)
 ├── nvim/                 # Neovim (lazy.nvim)
-├── theme/                # palette.env + templates → regenerates every app's colours (`make theme`)
-├── tmux/  wezterm/       # terminal + multiplexer (tmux/layouts, tmux/scripts)
-├── icons/ vscode/ firefox/ chrome-theme/   # custom app icons + editor/browser themes (`make rice`)
-├── atuin/ yazi/ bat/ btop/ fastfetch/ mise/ procs/ direnv/ gh-dash/ posting/ jesseduffield/
-├── yabai/ skhd/ borders/ # tiling WM + hotkeys + window borders
-└── starship/ lazygit/
+├── theme/                # palette.env + templates → regenerates app colours (`make theme`)
+├── tmux/ ghostty/        # terminal + multiplexer
+├── icons/ vscode/        # app icons + editor themes
+├── yabai/ skhd/ borders/ sketchybar/ # tiling WM + hotkeys + window borders + status bar
+└── starship/ lazygit/ bat/
 ```
 
 ## Machine-local overrides

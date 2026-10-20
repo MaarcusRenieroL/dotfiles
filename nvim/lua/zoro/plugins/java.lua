@@ -24,36 +24,125 @@ return {
 				"\n"
 			)
 		)
+		-- Only the java-test *plugin* jar is an OSGi bundle. Mason's folder also holds the JUnit
+		-- runtime jars (two conflicting versions), which make jdtls fail with "Load bundle list".
 		vim.list_extend(
 			bundles,
-			vim.split(vim.fn.glob(mason .. "/packages/java-test/extension/server/*.jar", true), "\n")
+			vim.split(vim.fn.glob(mason .. "/packages/java-test/extension/server/com.microsoft.java.test.plugin-*.jar", true), "\n")
 		)
 		-- Drop any empty entries (globs that matched nothing).
 		bundles = vim.tbl_filter(function(j)
 			return j ~= ""
 		end, bundles)
 
-		local function start()
-			local root = vim.fs.root(0, {
+		local function get_jdk_homes()
+			local homes = {}
+			-- Prefer OpenJDK 21
+			local jdk21 = "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
+			if vim.fn.isdirectory(jdk21) == 0 then
+				jdk21 = vim.env.HOME .. "/.jdks/temurin21/Contents/Home"
+			end
+			if vim.fn.isdirectory(jdk21) == 1 then
+				homes["21"] = jdk21
+			end
+
+			-- Homebrew OpenJDK (unversioned, currently JDK 27)
+			local jdk_default = "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+			if vim.fn.isdirectory(jdk_default) == 1 then
+				homes["default"] = jdk_default
+			end
+
+			return homes
+		end
+
+		-- jdtls needs JDK 21+. Prioritize JDK 21 to avoid mismatched compiler versions.
+		local function java_executable()
+			local homes = get_jdk_homes()
+			if homes["21"] and vim.fn.executable(homes["21"] .. "/bin/java") == 1 then
+				return homes["21"] .. "/bin/java"
+			end
+			if vim.env.JAVA_HOME and vim.fn.executable(vim.env.JAVA_HOME .. "/bin/java") == 1 then
+				return vim.env.JAVA_HOME .. "/bin/java"
+			end
+			if homes["default"] and vim.fn.executable(homes["default"] .. "/bin/java") == 1 then
+				return homes["default"] .. "/bin/java"
+			end
+			local sys_java = vim.fn.exepath("java")
+			if sys_java and sys_java ~= "" then
+				return sys_java
+			end
+		end
+
+		local function get_root()
+			local bufname = vim.api.nvim_buf_get_name(0)
+			if bufname == "" then
+				return nil
+			end
+			local markers = {
 				"mvnw",
 				"gradlew",
 				"pom.xml",
 				"build.gradle",
 				"build.gradle.kts",
 				"settings.gradle",
+				".idea",
+				".project",
+				".classpath",
 				".git",
-			})
+			}
+			local root = vim.fs.root(0, markers)
+			if not root then
+				root = vim.fs.root(0, { "src" })
+			end
+			if not root then
+				root = vim.fs.dirname(bufname)
+			end
+			return root
+		end
+
+		local function build_runtimes()
+			local homes = get_jdk_homes()
+			local runtimes = {}
+			if homes["21"] then
+				table.insert(runtimes, {
+					name = "JavaSE-21",
+					path = homes["21"],
+					default = true,
+				})
+			end
+			if homes["default"] then
+				table.insert(runtimes, {
+					name = "JavaSE-27",
+					path = homes["default"],
+				})
+			end
+			return runtimes
+		end
+
+		local function get_workspace_dir(root)
+			local project_name = vim.fs.basename(root)
+			local hash = vim.fn.sha256(root):sub(1, 8)
+			return vim.fn.stdpath("data") .. "/jdtls-workspace/" .. project_name .. "_" .. hash
+		end
+
+		local function start()
+			local root = get_root()
 			if not root then
 				return
 			end
 
-			local workspace = vim.fn.stdpath("data")
-				.. "/jdtls-workspace/"
-				.. vim.fn.fnamemodify(root, ":p:h:t")
+			local workspace = get_workspace_dir(root)
 
 			-- Lombok is common in Spring Boot. If present, attach the agent.
 			local lombok = mason .. "/packages/jdtls/lombok.jar"
 			local cmd = { mason .. "/bin/jdtls", "-data", workspace }
+			local java = java_executable()
+			if java then
+				table.insert(cmd, "--java-executable=" .. java)
+			else
+				vim.notify("jdtls: no JDK found (brew install openjdk@21)", vim.log.levels.ERROR)
+				return
+			end
 			if vim.fn.filereadable(lombok) == 1 then
 				table.insert(cmd, "--jvm-arg=-javaagent:" .. lombok)
 			end
@@ -71,7 +160,10 @@ return {
 				init_options = { bundles = bundles },
 				settings = {
 					java = {
-						configuration = { updateBuildConfiguration = "interactive" },
+						configuration = {
+							updateBuildConfiguration = "interactive",
+							runtimes = build_runtimes(),
+						},
 						eclipse = { downloadSources = true },
 						maven = { downloadSources = true },
 						implementationsCodeLens = { enabled = true },
@@ -106,6 +198,17 @@ return {
 				end,
 			})
 		end
+
+		vim.api.nvim_create_user_command("JdtCleanWorkspace", function()
+			local root = get_root()
+			if not root then
+				vim.notify("jdtls: could not determine project root", vim.log.levels.WARN)
+				return
+			end
+			local ws = get_workspace_dir(root)
+			vim.fn.delete(ws, "rf")
+			vim.notify("jdtls: deleted workspace cache: " .. ws, vim.log.levels.INFO)
+		end, { desc = "Clean JDTLS workspace cache for current project" })
 
 		vim.api.nvim_create_autocmd("FileType", {
 			group = vim.api.nvim_create_augroup("zoro-jdtls", { clear = true }),

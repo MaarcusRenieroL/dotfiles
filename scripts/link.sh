@@ -11,7 +11,7 @@ hr "Linking dotfiles"
 # 1) Home-directory dotfiles via GNU stow.
 #    Each package's .stow-local-ignore keeps non-$HOME files (themes, modules)
 #    from leaking into $HOME.
-HOME_PACKAGES=(zsh tmux git wezterm)
+HOME_PACKAGES=(zsh tmux git)
 
 # Files stow will place in $HOME — back up any real (non-symlink) versions
 # first so stow never aborts on a conflict.
@@ -19,7 +19,6 @@ HOME_TARGETS=(
   "$HOME/.zshenv" "$HOME/.zshrc"
   "$HOME/.tmux.conf"
   "$HOME/.gitconfig" "$HOME/.gitignore_global"
-  "$HOME/.wezterm.lua"
 )
 for t in "${HOME_TARGETS[@]}"; do backup_if_real "$t"; done
 
@@ -42,8 +41,9 @@ link_file "$DOTFILES/sketchybar" "$HOME/.config/sketchybar"
 # its config into the real ~/.config (where it falls back to looking).
 link_file "$DOTFILES/ghostty/config" "$HOME/.config/ghostty/config"
 link_file "$DOTFILES/ghostty/themes" "$HOME/.config/ghostty/themes"
+link_file "$DOTFILES/ghostty/Ghostty.icns" "$HOME/.config/ghostty/Ghostty.icns"
 
-# 3) Everything else (nvim, starship, lazygit, neofetch) is read in place
+# 3) Everything else (nvim, starship, lazygit) is read in place
 #    from $DOTFILES via XDG_CONFIG_HOME, which ~/.zshenv exports. No links needed.
 
 ok "Linking complete."

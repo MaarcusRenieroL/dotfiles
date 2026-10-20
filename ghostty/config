@@ -15,3 +15,7 @@ cursor-style = block
 cursor-style-blink = true
 
 shell-integration = zsh
+
+# App icon: Ghostty redraws its own Dock icon, so use its custom-icon support
+macos-icon = custom
+macos-custom-icon = ~/.config/ghostty/Ghostty.icns

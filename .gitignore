@@ -22,3 +22,8 @@ git/local.gitconfig
 .android/
 configstore/
 gh/
+neon/
+mcp-config.json
+
+# Generated icon sets (large; rebuild with: swift icons/generate.swift icons/apple apple && bash icons/make-icns.sh)
+icons/apple/

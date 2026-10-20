@@ -1,8 +1,21 @@
 // Generates monogram app icons in the maarcus.dev style (navy squircle, emerald mono type).
-// Usage: swift icons/generate.swift <outdir>
+// Usage: swift icons/generate.swift <outdir> [apple]   (default: brew-installed apps; "apple": built-in macOS apps)
 import AppKit
 
-let apps: [(String, String)] = [
+let apple: [(String, String)] = [
+  ("Safari", "sf"), ("Mail", "ml"), ("Messages", "ms"), ("Notes", "nt"), ("Calendar", "cd"),
+  ("Reminders", "rm"), ("Photos", "ph"), ("Music", "mu"), ("Maps", "mp"), ("FaceTime", "ft"),
+  ("Contacts", "ct"), ("Podcasts", "pc"), ("TV", "tv"), ("Weather", "wx"), ("Clock", "ck"),
+  ("Calculator", "cc"), ("Preview", "pv"), ("Shortcuts", "sc"), ("Stocks", "sk"), ("Books", "bk"),
+  ("Home", "hm"), ("Freeform", "ff"), ("Journal", "jn"), ("News", "nw"), ("Passwords", "pw"),
+  ("Phone", "po"), ("Find My", "fm"), ("Voice Memos", "vm"), ("TextEdit", "te"), ("Stickies", "sy"),
+  ("App Store", "as"), ("System Settings", "ss"), ("Terminal", "tm"), ("Activity Monitor", "am"),
+  ("Finder", "fn"), ("QuickTime Player", "qt"), ("Photo Booth", "pb"), ("Dictionary", "dy"),
+  ("Time Machine", "tc"), ("Tips", "tp"), ("Automator", "au"), ("Font Book", "fb"),
+  ("Image Capture", "ic"), ("Disk Utility", "du"), ("Keychain Access", "kc"), ("Console", "cs"),
+  ("Screenshot", "sh"), ("Script Editor", "se"),
+]
+let installed: [(String, String)] = [
   ("1Password", "1p"), ("ChatGPT", "gp"), ("Claude", "cl"), ("Discord", "dc"), ("Docker", "dk"),
   ("Firefox", "ff"), ("Ghostty", "gh"), ("Google Chrome", "cr"), ("Insomnia", "in"),
   ("IntelliJ IDEA", "ij"), ("LocalSend", "ls"), ("Notion", "no"), ("Notion Calendar", "nc"),
@@ -11,6 +24,7 @@ let apps: [(String, String)] = [
   ("Scroll Reverser", "sr"),
 ]
 let out = CommandLine.arguments.count > 1 ? CommandLine.arguments[1] : "icons"
+let apps = CommandLine.arguments.count > 2 && CommandLine.arguments[2] == "apple" ? apple : installed
 try? FileManager.default.createDirectory(atPath: out, withIntermediateDirectories: true)
 
 func hex(_ v: UInt32, _ a: CGFloat = 1) -> NSColor {

@@ -58,15 +58,3 @@ else
   ln -sfn "$DOTFILES/vscode/settings.json" "$VSC_USER/settings.json"
   ok "linked VS Code settings"
 fi
-
-hr "Firefox"
-for prof in "$HOME"/Library/Application\ Support/Firefox/Profiles/*.default-release; do
-  [ -d "$prof" ] || continue
-  ln -sfn "$DOTFILES/firefox/chrome" "$prof/chrome"
-  pref='user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);'
-  grep -qF "$pref" "$prof/user.js" 2>/dev/null || echo "$pref" >> "$prof/user.js"
-  ok "themed $(basename "$prof") (restart Firefox)"
-done
-
-hr "Chrome"
-echo "Load $DOTFILES/chrome-theme once via chrome://extensions → Developer mode → Load unpacked."
