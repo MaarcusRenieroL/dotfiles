@@ -1,4 +1,5 @@
 #!/bin/bash
+CONFIG_DIR="${CONFIG_DIR:-$HOME/.config/sketchybar}"
 source "$CONFIG_DIR/colors.sh"
 
 CACHE="/tmp/sketchybar_net"

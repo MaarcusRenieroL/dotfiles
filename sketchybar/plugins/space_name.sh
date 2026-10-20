@@ -1,4 +1,5 @@
 #!/bin/bash
+CONFIG_DIR="${CONFIG_DIR:-$HOME/.config/sketchybar}"
 source "$CONFIG_DIR/colors.sh"
 
 sid=$(yabai -m query --spaces --space 2>/dev/null | jq -r .index 2>/dev/null)
