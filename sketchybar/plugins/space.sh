@@ -6,9 +6,15 @@ focused=$([ "$(yabai -m query --spaces --space 2>/dev/null | jq -r .index)" = "$
 windows=$(yabai -m query --windows --space "$idx" 2>/dev/null | jq '[.[] | select(."is-hidden"==false and ."is-minimized"==false)] | length')
 
 if [ "$focused" = "true" ]; then
-  sketchybar --set "$NAME" icon.color=$BG background.color=$ACCENT background.drawing=on
+  sketchybar --set "$NAME" icon.color=$BG \
+                           background.color=$ACCENT \
+                           background.drawing=on \
+                           background.corner_radius=6 \
+                           background.height=20
 elif [ "${windows:-0}" -gt 0 ]; then
-  sketchybar --set "$NAME" icon.color=$FG background.color=$TRANSPARENT background.drawing=off
+  sketchybar --set "$NAME" icon.color=$FG \
+                           background.drawing=off
 else
-  sketchybar --set "$NAME" icon.color=$DIM background.color=$TRANSPARENT background.drawing=off
+  sketchybar --set "$NAME" icon.color=$DIM \
+                           background.drawing=off
 fi

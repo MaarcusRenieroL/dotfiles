@@ -147,21 +147,25 @@ threshold = 50
 style = "bold amber"
 
 # =========================
-# Prompt Character
+# Prompt Character (Zoro Santoryu)
 # =========================
 
 [character]
-success_symbol = "[❯](bold accent)"
-error_symbol = "[❯](bold danger)"
-vimcmd_symbol = "[❮](bold violet)"
+success_symbol = "[󰓦 ❯](bold accent)"
+error_symbol = "[󰓦 ❯](bold danger)"
+vimcmd_symbol = "[󰓦 ❮](bold violet)"
 
 # =========================
-# Palette (maarcus.dev)
+# Palette (Zoro - maarcus.dev)
 # =========================
 
 [palettes.zoro]
 accent = "#34d399"
+accent_bright = "#6ee7b7"
 muted = "#8c99a8"
 violet = "#a78bfa"
 amber = "#fbbf24"
 danger = "#f87171"
+surface = "#1c2833"
+card = "#111a23"
+bg = "#0b1219"
