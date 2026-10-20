@@ -95,75 +95,50 @@ sketchybar --add item wifi.gw popup.wifi --set wifi.gw label.color=$MUTED icon.d
 sketchybar --add item network right \
            --set network update_freq=2 script="$PLUGIN_DIR/network.sh"
 
-# 6. Spotify (Compact bar widget + Rich Interactive Player Card)
+# 6. Spotify (Compact bar widget + Sleek Horizontal Floating Island Player)
 sketchybar --add item spotify right \
            --set spotify icon=󰓇 icon.color=$ACCENT update_freq=3 drawing=off \
                  label.max_chars=18 \
-                 popup.align=center \
+                 popup.horizontal=on popup.height=38 popup.align=center \
                  popup.background.color=$CARD popup.background.border_width=1 \
-                 popup.background.border_color=$BORDER popup.background.corner_radius=12 \
+                 popup.background.border_color=$BORDER popup.background.corner_radius=10 \
                  script="$PLUGIN_DIR/spotify.sh update" \
                  click_script="$PLUGIN_DIR/spotify.sh popup" \
            --subscribe spotify mouse.exited.global
 
-# Album Cover Artwork
+# Album Cover Thumbnail
 sketchybar --add item spotify.cover popup.spotify \
            --set spotify.cover icon.drawing=off label.drawing=off \
                  background.drawing=on background.color=$TRANSPARENT \
-                 background.image.scale=0.18 background.image.corner_radius=8 \
-                 background.height=115 width=115 \
-                 padding_left=24 padding_right=24 \
+                 background.image.scale=0.06 background.image.corner_radius=6 \
+                 background.height=28 width=28 \
+                 padding_left=6 padding_right=6 \
                  click_script="open -a Spotify"
 
-# Track Title
+# Track Title + Artist
 sketchybar --add item spotify.title popup.spotify \
            --set spotify.title icon.drawing=off \
-                 label.font="$FONT:Bold:13.0" label.color=$FG label.max_chars=28 \
-                 label.align=center width=160 \
+                 label.font="$FONT:Bold:12.0" label.color=$FG label.max_chars=32 \
+                 padding_left=2 padding_right=10 \
                  click_script="open -a Spotify"
 
-# Artist Name
-sketchybar --add item spotify.artist popup.spotify \
-           --set spotify.artist icon.drawing=off \
-                 label.font="$FONT:Medium:11.0" label.color=$ACCENT label.max_chars=28 \
-                 label.align=center width=160 \
-                 click_script="open -a Spotify"
-
-# Album Name
-sketchybar --add item spotify.album popup.spotify \
-           --set spotify.album icon.drawing=off \
-                 label.font="$FONT:Regular:10.0" label.color=$MUTED label.max_chars=28 \
-                 label.align=center width=160 \
-                 click_script="open -a Spotify"
-
-# Progress Bar (Position / Duration)
-sketchybar --add item spotify.progress popup.spotify \
-           --set spotify.progress icon.drawing=off \
-                 label.font="$FONT:Regular:10.0" label.color=$MUTED \
-                 label.align=center width=160
-
-# Controls: Previous, Play/Pause, Next
+# Controls: Previous, Play/Pause, Next (Horizontal row)
 sketchybar --add item spotify.prev popup.spotify \
-           --set spotify.prev icon=󰒮 icon.color=$ACCENT icon.font="$FONT:Bold:13.0" \
-                 label="Previous" label.font="$FONT:Medium:11.0" label.color=$FG \
-                 background.drawing=on background.color=$BG background.border_width=1 \
-                 background.border_color=$BORDER background.corner_radius=6 background.height=24 \
-                 padding_left=8 padding_right=8 \
+           --set spotify.prev icon=󰒮 icon.color=$FG icon.font="$FONT:Bold:14.0" \
+                 label.drawing=off \
+                 padding_left=6 padding_right=6 \
                  click_script="$PLUGIN_DIR/spotify.sh prev"
 
 sketchybar --add item spotify.play popup.spotify \
-           --set spotify.play icon=󰏤 icon.color=$BG icon.font="$FONT:Bold:13.0" \
-                 label="Pause" label.font="$FONT:Bold:11.0" label.color=$BG \
-                 background.drawing=on background.color=$ACCENT background.corner_radius=6 background.height=24 \
-                 padding_left=8 padding_right=8 \
+           --set spotify.play icon=󰏤 icon.color=$ACCENT icon.font="$FONT:Bold:16.0" \
+                 label.drawing=off \
+                 padding_left=6 padding_right=6 \
                  click_script="$PLUGIN_DIR/spotify.sh playpause"
 
 sketchybar --add item spotify.next popup.spotify \
-           --set spotify.next icon=󰒭 icon.color=$ACCENT icon.font="$FONT:Bold:13.0" \
-                 label="Next" label.font="$FONT:Medium:11.0" label.color=$FG \
-                 background.drawing=on background.color=$BG background.border_width=1 \
-                 background.border_color=$BORDER background.corner_radius=6 background.height=24 \
-                 padding_left=8 padding_right=8 \
+           --set spotify.next icon=󰒭 icon.color=$FG icon.font="$FONT:Bold:14.0" \
+                 label.drawing=off \
+                 padding_left=6 padding_right=8 \
                  click_script="$PLUGIN_DIR/spotify.sh next"
 
 # 7. Memory
