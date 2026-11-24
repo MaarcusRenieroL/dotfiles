@@ -1,0 +1,76 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "file",
+    "source": "~/.config/fastfetch/zoro.txt",
+    "color": {
+      "1": "38;2;74;222;128"
+    },
+    "padding": {
+      "right": 3
+    }
+  },
+  "display": {
+    "separator": "  ",
+    "color": {
+      "keys": "38;2;74;222;128",
+      "title": "38;2;74;222;128",
+      "separator": "38;2;154;154;154"
+    }
+  },
+  "modules": [
+    {
+      "type": "title",
+      "format": "󰓦  {user-name}@{host-name}"
+    },
+    {
+      "type": "separator",
+      "string": "─"
+    },
+    {
+      "type": "os",
+      "key": "os   "
+    },
+    {
+      "type": "host",
+      "key": "host "
+    },
+    {
+      "type": "kernel",
+      "key": "kern "
+    },
+    {
+      "type": "uptime",
+      "key": "up   "
+    },
+    {
+      "type": "shell",
+      "key": "sh   "
+    },
+    {
+      "type": "terminal",
+      "key": "term "
+    },
+    {
+      "type": "cpu",
+      "key": "cpu  "
+    },
+    {
+      "type": "memory",
+      "key": "mem  "
+    },
+    {
+      "type": "disk",
+      "key": "disk "
+    },
+    {
+      "type": "battery",
+      "key": "batt "
+    },
+    "break",
+    {
+      "type": "colors",
+      "symbol": "circle"
+    }
+  ]
+}

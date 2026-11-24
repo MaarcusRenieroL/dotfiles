@@ -1,0 +1,10 @@
+--max-columns=150
+--max-columns-preview
+--smart-case
+--hidden
+--glob=!.git/*
+--colors=line:fg:10
+--colors=line:style:bold
+--colors=path:fg:2
+--colors=match:fg:1
+--colors=match:style:bold

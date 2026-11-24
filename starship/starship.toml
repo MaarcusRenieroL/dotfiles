@@ -1,0 +1,104 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+format = """
+[](#1e3a29)\
+$os\
+$directory\
+[](bg:#161f18 fg:#1e3a29)\
+$git_branch\
+$git_status\
+[](fg:#161f18 bg:#0d120e)\
+$java\
+$nodejs\
+$python\
+$rust\
+$docker_context\
+[](fg:#0d120e)\
+$fill\
+$cmd_duration\
+$line_break\
+$character"""
+
+palette = "zoro"
+
+[palettes.zoro]
+bg_pill = "#1e3a29"
+bg_dark = "#161f18"
+bg_deep = "#0d120e"
+green_bright = "#4ade80"
+green_mid = "#22c55e"
+purple = "#a855f7"
+cyan = "#38bdf8"
+red = "#e11d48"
+yellow = "#eab308"
+fg = "#f0fdf4"
+muted = "#475569"
+
+[os]
+disabled = false
+style = "bg:bg_pill fg:green_bright"
+
+[os.symbols]
+Macos = "󰀵 "
+
+[directory]
+style = "bg:bg_pill fg:fg bold"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Developer" = "󰲋 "
+"Projects" = "󰲋 "
+
+[git_branch]
+symbol = ""
+style = "bg:bg_dark fg:green_bright"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "bg:bg_dark fg:purple"
+format = '[$all_status$ahead_behind ]($style)'
+
+[java]
+symbol = " "
+style = "bg:bg_deep fg:red"
+format = '[ $symbol($version) ]($style)'
+
+[nodejs]
+symbol = " "
+style = "bg:bg_deep fg:green_mid"
+format = '[ $symbol($version) ]($style)'
+
+[python]
+symbol = " "
+style = "bg:bg_deep fg:yellow"
+format = '[ $symbol($version) ]($style)'
+
+[rust]
+symbol = " "
+style = "bg:bg_deep fg:cyan"
+format = '[ $symbol($version) ]($style)'
+
+[docker_context]
+symbol = " "
+style = "bg:bg_deep fg:cyan"
+format = '[ $symbol$context ]($style)'
+
+[fill]
+symbol = " "
+
+[cmd_duration]
+min_time = 1000
+style = "fg:muted"
+format = "󱎫 [$duration]($style)"
+
+[character]
+success_symbol = "[❯](bold green_bright)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold purple)"
+

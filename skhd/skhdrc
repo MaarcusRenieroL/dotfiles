@@ -1,0 +1,90 @@
+# Applications blacklisted from skhd (hotkeys pass directly to the app)
+.blacklist [
+    "WhatsApp"
+    "‎WhatsApp"
+]
+
+# to restart yabai and skhd
+alt + shift - r : yabai --restart-service; skhd --restart-service
+
+# navigation between different sides
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
+
+# swapping windows
+shift + alt - h : yabai -m window --warp west
+shift + alt - j : yabai -m window --warp south
+shift + alt - k : yabai -m window --warp north
+shift + alt - l : yabai -m window --warp east
+
+# resizing windows
+ctrl + alt - h : yabai -m window --resize left:-50:0 || yabai -m window --resize right:-50:0
+ctrl + alt - j : yabai -m window --resize bottom:0:50 || yabai -m window --resize top:0:50
+ctrl + alt - k : yabai -m window --resize top:0:-50 || yabai -m window --resize bottom:0:-50
+ctrl + alt - l : yabai -m window --resize right:50:0 || yabai -m window --resize left:50:0
+
+# balancing spaces between each window
+alt - b : yabai -m space --balance
+
+# rotating existing windows in 90deg angles
+alt - r : yabai -m space --rotate 90
+
+alt - x : yabai -m space --mirror x-axis
+alt - y : yabai -m space --mirror y-axis
+
+# zooming current window to fill the entire screen
+alt - f : yabai -m window --toggle zoom-fullscreen
+
+# detach from the tile and open the window in float
+shift + alt - f : yabai -m window --toggle float --grid 4:4:1:1:2:2
+
+# fullscreen
+ctrl + alt - f : yabai -m window --toggle native-fullscreen
+
+# opening ghostty
+alt - return : open -na Ghostty
+
+# navigate to different space (1-9) is handled natively by macOS Mission Control via Option + 1..9
+
+# move window from one space to another (1-9)
+shift + alt - 1 : yabai -m window --space 1; skhd -k "alt - 1"
+shift + alt - 2 : yabai -m window --space 2; skhd -k "alt - 2"
+shift + alt - 3 : yabai -m window --space 3; skhd -k "alt - 3"
+shift + alt - 4 : yabai -m window --space 4; skhd -k "alt - 4"
+shift + alt - 5 : yabai -m window --space 5; skhd -k "alt - 5"
+shift + alt - 6 : yabai -m window --space 6; skhd -k "alt - 6"
+shift + alt - 7 : yabai -m window --space 7; skhd -k "alt - 7"
+shift + alt - 8 : yabai -m window --space 8; skhd -k "alt - 8"
+shift + alt - 9 : yabai -m window --space 9; skhd -k "alt - 9"
+
+ctrl + alt - 1 : yabai -m window --grid 1:2:0:0:1:1
+ctrl + alt - 2 : yabai -m window --grid 1:2:1:0:1:1
+ctrl + alt - 3 : yabai -m window --grid 1:3:0:0:1:1
+ctrl + alt - 4 : yabai -m window --grid 1:3:1:0:1:1
+ctrl + alt - 5 : yabai -m window --grid 1:3:2:0:1:1
+
+# --- Layout presets ------------------------------------------------------------
+ctrl + alt - b : yabai -m space --layout bsp
+ctrl + alt - s : yabai -m space --layout stack
+ctrl + alt - 0 : yabai -m space --layout float
+alt - tab : yabai -m window --focus recent
+
+# --- Scratchpad: drop-down tmux terminal ----------------------------------------
+alt - 0x32 : ~/dotfiles/skhd/scripts/scratchpad.sh        # alt + `
+
+# --- Launch mode: alt + o, then a letter ---------------------------------------
+:: launch @ : skhd -k escape
+alt - o ; launch
+launch < escape ; default
+launch < t : open -a Ghostty; skhd -k escape
+launch < c : open -a "Google Chrome"; skhd -k escape
+launch < f : open -a Firefox; skhd -k escape
+launch < v : open -a "Visual Studio Code"; skhd -k escape
+launch < d : open -a Discord; skhd -k escape
+launch < s : open -a Spotify; skhd -k escape
+launch < n : open -a Notion; skhd -k escape
+launch < m : open -a "Notion Calendar"; skhd -k escape
+launch < r : open -a Raycast; skhd -k escape
+launch < a : open -a Augur; skhd -k escape

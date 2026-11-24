@@ -1,0 +1,58 @@
+[user]
+	name = Maarcus Reniero L
+	email = maarcusreniero.l@gmail.com
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore_global
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+	default = current
+
+[fetch]
+	prune = true
+
+[rebase]
+	autoStash = true
+
+[rerere]
+	enabled = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[diff]
+	colorMoved = default
+
+[delta]
+	navigate = true
+	line-numbers = true
+	side-by-side = false
+	features = zoro
+
+[alias]
+	co = checkout
+	sw = switch
+	st = status --short --branch
+	ci = commit
+	br = branch
+	ds = diff --staged
+	d = diff
+	lg = log --graph --decorate --oneline --all
+	last = log -1 HEAD --stat
+	uncommit = reset --soft HEAD~1
+
+# Theme definition for the `zoro` delta feature above.
+[include]
+	path = ~/dotfiles/git/themes/zoro.gitconfig
+
+# Optional machine-local overrides (gitignored, skipped if absent).
+[include]
+	path = ~/dotfiles/git/local.gitconfig

@@ -1,0 +1,22 @@
+# Zoro (maarcus.dev palette) theme for delta.
+# Referenced from ~/.gitconfig via `features = zoro`. Self-contained.
+[delta "zoro"]
+    minus-style                   = syntax "#2a1a1f"
+    minus-non-emph-style          = syntax "#2a1a1f"
+    minus-emph-style              = syntax "#5a2428"
+    minus-empty-line-marker-style = syntax "#2a1a1f"
+    line-numbers-minus-style      = "#f87171"
+    plus-style                    = syntax "#10261f"
+    plus-non-emph-style           = syntax "#10261f"
+    plus-emph-style               = syntax "#166534"
+    plus-empty-line-marker-style  = syntax "#10261f"
+    line-numbers-plus-style       = "#4ade80"
+    line-numbers-zero-style       = "#525252"
+    zero-style                    = syntax
+    whitespace-error-style        = "#232323" reverse
+    file-style                    = "#ededed" bold
+    file-decoration-style         = "#4ade80" ul
+    hunk-header-style             = line-number syntax
+    hunk-header-decoration-style  = "#232323" box
+    hunk-header-line-number-style = "#9a9a9a"
+    blame-palette                 = "#0b0b0b" "#090909" "#141414" "#232323" "#333333"

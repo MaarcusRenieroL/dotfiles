@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Shell history & completion dumps
+.*_history
+.zcompdump*
+
+# Machine-local overrides (not tracked)
+*.local.*
+local.zsh
+local.gitconfig
+git/local.gitconfig
+zsh/local.zsh
+
+# Tool caches & state
+homebrew/
+.dotfiles_backup/
+
+# Editors & swaps
+*.swp
+*.swo
+*~
+.netrwhist

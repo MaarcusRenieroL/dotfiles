@@ -1,0 +1,16 @@
+gui:
+  nerdFontsVersion: "3"
+  border: "rounded"
+  showFileTree: true
+  showCommandLog: false
+  showBottomLine: true
+  scrollHeight: 2
+  scrollPastBottom: false
+  mouseEvents: true
+  sidePanelWidth: 0.3333
+
+git:
+  paging:
+    colorArg: always
+
+promptToReturnFromSubprocess: false
