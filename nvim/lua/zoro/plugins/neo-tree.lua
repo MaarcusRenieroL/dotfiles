@@ -11,5 +11,18 @@ return {
     keys = {
       { "<C-n>", "<cmd>Neotree toggle<CR>", desc = "Toggle Neo-tree" },
     },
+    opts = {
+      filesystem = {
+        filtered_items = {
+          visible = true,
+          hide_dotfiles = false,
+          hide_gitignored = false,
+          hide_hidden = false,
+        },
+        follow_current_file = {
+          enabled = true,
+        },
+      },
+    },
   },
 }
