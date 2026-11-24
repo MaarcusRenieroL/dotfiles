@@ -8,9 +8,8 @@ gui:
   scrollPastBottom: false
   mouseEvents: true
   sidePanelWidth: 0.3333
-
 git:
-  paging:
-    colorArg: always
-
+  diffRenderers:
+    - colorArg: always
+      type: rawGit
 promptToReturnFromSubprocess: false
