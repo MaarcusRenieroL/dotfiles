@@ -40,6 +40,9 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 # detach from the tile and open the window in float
 shift + alt - f : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
+# picture-in-picture mini float (bottom-right corner)
+shift + alt - p : yabai -m window --toggle float --grid 5:5:4:4:1:1
+
 # fullscreen
 ctrl + alt - f : yabai -m window --toggle native-fullscreen
 
@@ -87,4 +90,7 @@ launch < s : open -a Spotify; skhd -k escape
 launch < n : open -a Notion; skhd -k escape
 launch < m : open -a "Notion Calendar"; skhd -k escape
 launch < r : open -a Raycast; skhd -k escape
-launch < a : open -a Augur; skhd -k escape
+launch < a : open -a Claude; skhd -k escape
+launch < g : open -a ChatGPT; skhd -k escape
+launch < w : open -a WhatsApp; skhd -k escape
+launch < b : open -a "Brave Browser"; skhd -k escape

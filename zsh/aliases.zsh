@@ -25,8 +25,13 @@ alias gp="git push"
 alias gpl="git pull"
 alias gd="git diff"
 alias gco="git checkout"
+alias gcb="git checkout -b"
+alias gco-="git checkout -"
 alias gb="git branch"
 alias gl="git log --oneline --graph --decorate"
+alias gcam="git commit --amend --no-edit"
+alias gundo="git reset --soft HEAD~1"
+alias gclean="git clean -fd"
 
 # tmux
 alias ta="tmux attach"

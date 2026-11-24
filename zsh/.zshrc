@@ -33,6 +33,12 @@ bindkey '^N' down-line-or-beginning-search
 [[ -n "$terminfo[kcuu1]" ]] && bindkey "$terminfo[kcuu1]" up-line-or-beginning-search
 [[ -n "$terminfo[kcud1]" ]] && bindkey "$terminfo[kcud1]" down-line-or-beginning-search
 
+# Directory navigation
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+
 # Completion
 [[ -d "$HOMEBREW_PREFIX/share/zsh/site-functions" ]] && fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
 
@@ -68,11 +74,24 @@ else
   fi
 fi
 
-# fzf-tab behaviour
+# fzf-tab & completion styling
 zstyle ':completion:*' menu no
 zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins commands functions
+zstyle ':completion:*:aliases' verbose yes
+
+# Preview alias definitions and command paths
+zstyle ':fzf-tab:complete:(-command-):*' fzf-preview 'which -- $word 2>/dev/null'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --icons --color=always $realpath'
 zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat --color=always --style=numbers --line-range=:40 $realpath 2>/dev/null || eza -1 --color=always $realpath 2>/dev/null'
+
+# fzf-tab popup styling (Zoro palette)
+zstyle ':fzf-tab:*' fzf-flags \
+  --color=bg+:#1e3a29,bg:#0d120e,spinner:#4ade80,hl:#22c55e \
+  --color=fg:#e2ece4,header:#22c55e,info:#eab308,pointer:#4ade80 \
+  --color=marker:#4ade80,fg+:#f0fdf4,prompt:#4ade80,hl+:#4ade80 \
+  --border=rounded --prompt='❯ ' --pointer='▶'
 
 # Aliases and functions
 for _f in "$ZSH_CONFIG"/aliases.zsh "$ZSH_CONFIG"/functions.zsh; do
@@ -83,7 +102,6 @@ unset _f
 # Tool initializations
 command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
 command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)
-command -v mise >/dev/null 2>&1 && eval "$(mise activate zsh)"
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh --cmd cd)"
 
 # zsh-syntax-highlighting (must be loaded at the very end of .zshrc)
